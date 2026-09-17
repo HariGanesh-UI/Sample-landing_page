@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Builders Nova — Construction Site Management Platform</title>
+    <meta name="description" content="Eliminate site delays, streamline procurement, and track daily progress in real time. The all-in-one construction management platform trusted by 50,000+ projects.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+/* ================================================================
+   DESIGN SYSTEM — Professional Construction SaaS
+   ================================================================ */
+:root {
+    /* Primary Palette */
+    --navy:        #1B2A4A;
+    --navy-dark:   #111D35;
+    --navy-light:  #2C3E6B;
+    --amber:       #F59E0B;
+    --amber-dark:  #D97706;
+    --amber-light: #FEF3C7;
+
+    /* Neutrals */
+    --white:       #FFFFFF;
+    --gray-50:     #F9FAFB;
+    --gray-100:    #F3F4F6;
+    --gray-200:    #E5E7EB;
+    --gray-300:    #D1D5DB;
+    --gray-400:    #9CA3AF;
+    --gray-500:    #6B7280;
+    --gray-600:    #4B5563;
+    --gray-700:    #374151;
+    --gray-800:    #1F2937;
+    --gray-900:    #111827;
+    --charcoal:    #1E293B;
+
+    /* Semantic */
+    --success:     #059669;
+    --success-bg:  #ECFDF5;
+    --warning:     #D97706;
+    --warning-bg:  #FFFBEB;
+    --error:       #DC2626;
+    --error-bg:    #FEF2F2;
+    --info:        #2563EB;
+    --info-bg:     #EFF6FF;
+
+    /* Shadows & Radii — 8px grid */
+    --shadow-xs:   0 1px 2px rgba(0,0,0,.05);
+    --shadow-sm:   0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md:   0 4px 6px -1px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.04);
+    --shadow-lg:   0 10px 15px -3px rgba(0,0,0,.08), 0 4px 6px rgba(0,0,0,.03);
+    --shadow-xl:   0 20px 25px -5px rgba(0,0,0,.08), 0 8px 10px rgba(0,0,0,.03);
+    --radius-sm:   6px;
+    --radius-md:   10px;
+    --radius-lg:   16px;
+    --radius-xl:   24px;
+}
+
+/* ================================================================
+   RESET & BASE
+   ================================================================ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
+body {
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:var(--white);
+    color:var(--charcoal);
+    line-height:1.6;
+    overflow-x:hidden;
+}
+img { max-width:100%; display:block; }
+a { text-decoration:none; color:inherit; }
+ul { list-style:none; }
+
+/* ================================================================
+   TYPOGRAPHY
+   ================================================================ */
+h1,h2,h3,h4,h5 { font-weight:700; line-height:1.2; color:var(--gray-900); letter-spacing:-.025em; }
+h1 { font-size:clamp(2.25rem,5vw,3.5rem); }
+h2 { font-size:clamp(1.75rem,3.5vw,2.5rem); }
+h3 { font-size:1.25rem; }
+h4 { font-size:1.1rem; }
+p  { color:var(--gray-600); font-size:1rem; }
+
+.section-label {
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:.8rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em;
+    color:var(--amber-dark); margin-bottom:12px;
+}
+.section-label svg { width:16px; height:16px; }
+
+.section-heading { text-align:center; max-width:680px; margin:0 auto 56px; }
+.section-heading p { margin-top:12px; font-size:1.1rem; color:var(--gray-500); }
+
+/* ================================================================
+   LAYOUT
+   ================================================================ */
+.container { max-width:1200px; margin:0 auto; padding:0 24px; }
+section { padding:96px 0; }
+
+/* ================================================================
+   BUTTONS
+   ================================================================ */
+.btn {
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:12px 28px; border-radius:var(--radius-sm); font-weight:600; font-size:.95rem;
+    border:none; cursor:pointer; transition:all .2s ease;
+}
+.btn-primary {
+    background:var(--amber); color:var(--gray-900);
+    box-shadow:0 1px 2px rgba(0,0,0,.1);
+}
+.btn-primary:hover { background:var(--amber-dark); transform:translateY(-1px); box-shadow:var(--shadow-md); }
+
+.btn-navy {
+    background:var(--navy); color:var(--white);
+}
+.btn-navy:hover { background:var(--navy-dark); transform:translateY(-1px); box-shadow:var(--shadow-md); }
+
+.btn-outline {
+    background:transparent; color:var(--navy); border:1.5px solid var(--gray-300);
+}
+.btn-outline:hover { border-color:var(--navy); background:var(--gray-50); }
+
+.btn-white {
+    background:var(--white); color:var(--navy);
+    box-shadow:0 1px 3px rgba(0,0,0,.12);
+}
+.btn-white:hover { background:var(--gray-50); transform:translateY(-1px); }
+
+.btn-sm { padding:8px 18px; font-size:.875rem; }
+.btn-lg { padding:16px 36px; font-size:1.05rem; }
+
+/* ================================================================
+   HEADER
+   ================================================================ */
+.site-header {
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--gray-200);
+    transition:box-shadow .3s;
+}
+.site-header.scrolled { box-shadow:var(--shadow-md); }
+
+.header-inner {
+    display:flex; align-items:center; justify-content:space-between;
+    max-width:1200px; margin:0 auto; padding:0 24px; height:72px;
+}
+
+.logo { display:flex; align-items:center; gap:12px; }
+.logo img { height:44px; width:auto; filter:drop-shadow(0 1px 2px rgba(0,0,0,.1)); }
+.logo-text { font-weight:800; font-size:1.2rem; color:var(--navy); letter-spacing:-.02em; }
+.logo-text span { display:block; font-size:.6rem; font-weight:600; color:var(--amber-dark); letter-spacing:.12em; text-transform:uppercase; }
+
+.main-nav { display:flex; align-items:center; gap:32px; }
+.main-nav a {
+    font-size:.9rem; font-weight:600; color:var(--gray-600);
+    transition:color .2s; position:relative;
+}
+.main-nav a:hover { color:var(--navy); }
+.main-nav a::after {
+    content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px;
+    background:var(--amber); transition:width .2s;
+}
+.main-nav a:hover::after { width:100%; }
+
+.header-actions { display:flex; align-items:center; gap:12px; }
+
+/* Mobile Menu */
+.mobile-toggle { display:none; background:none; border:none; cursor:pointer; padding:8px; }
+.mobile-toggle svg { width:24px; height:24px; color:var(--gray-700); }
+.mobile-menu {
+    display:none; position:fixed; top:72px; left:0; right:0; bottom:0;
+    background:var(--white); z-index:999; padding:24px;
+    flex-direction:column; gap:8px;
+}
+.mobile-menu.open { display:flex; }
+.mobile-menu a {
+    padding:16px; font-size:1.05rem; font-weight:600; color:var(--gray-700);
+    border-radius:var(--radius-sm); transition:background .2s;
+}
+.mobile-menu a:hover { background:var(--gray-100); }
+.mobile-menu .btn { margin-top:8px; text-align:center; }
+
+/* ================================================================
+   HERO SECTION
+   ================================================================ */
+.hero {
+    padding:136px 0 80px;
+    background:linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%);
+    position:relative; overflow:hidden;
+}
+.hero::before {
+    content:''; position:absolute; top:0; right:0; width:600px; height:600px;
+    background:radial-gradient(circle, rgba(245,158,11,.06) 0%, transparent 70%);
+    pointer-events:none;
+}
+
+.hero-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;
+}
+
+.hero-content { position:relative; z-index:2; }
+.hero-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    padding:6px 16px; background:var(--amber-light); color:var(--amber-dark);
+    border-radius:100px; font-size:.8rem; font-weight:700; margin-bottom:24px;
+    border:1px solid rgba(245,158,11,.2);
+}
+.hero h1 { margin-bottom:20px; }
+.hero h1 em { font-style:normal; color:var(--amber-dark); }
+.hero-desc { font-size:1.15rem; color:var(--gray-500); margin-bottom:32px; max-width:520px; line-height:1.7; }
+.hero-cta { display:flex; gap:12px; margin-bottom:32px; flex-wrap:wrap; }
+.hero-trust {
+    display:flex; gap:24px; flex-wrap:wrap;
+}
+.hero-trust span {
+    display:flex; align-items:center; gap:6px;
+    font-size:.85rem; color:var(--gray-500); font-weight:500;
+}
+.hero-trust svg { width:16px; height:16px; color:var(--success); flex-shrink:0; }
+
+/* Hero Visual */
+.hero-visual { position:relative; }
+.hero-browser {
+    background:var(--white); border-radius:var(--radius-lg); overflow:hidden;
+    box-shadow:var(--shadow-xl); border:1px solid var(--gray-200);
+}
+.browser-bar {
+    display:flex; align-items:center; gap:8px;
+    padding:12px 16px; background:var(--gray-100); border-bottom:1px solid var(--gray-200);
+}
+.browser-dot { width:10px; height:10px; border-radius:50%; }
+.browser-dot:nth-child(1) { background:#FF5F57; }
+.browser-dot:nth-child(2) { background:#FFBD2E; }
+.browser-dot:nth-child(3) { background:#28CA42; }
+.browser-url {
+    flex:1; margin-left:12px; padding:6px 12px; background:var(--white);
+    border-radius:4px; font-size:.75rem; color:var(--gray-500);
+    border:1px solid var(--gray-200);
+}
+.hero-browser img { width:100%; display:block; }
+
+/* Floating Stats Card */
+.hero-float-card {
+    position:absolute; bottom:-20px; left:-30px;
+    background:var(--white); border-radius:var(--radius-md); padding:16px 20px;
+    box-shadow:var(--shadow-lg); border:1px solid var(--gray-200);
+    display:flex; align-items:center; gap:12px; z-index:3;
+    animation:floatY 4s ease-in-out infinite;
+}
+@keyframes floatY { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+.float-icon {
+    width:40px; height:40px; border-radius:var(--radius-sm);
+    display:flex; align-items:center; justify-content:center;
+}
+.float-icon.green { background:var(--success-bg); color:var(--success); }
+.float-icon.amber { background:var(--amber-light); color:var(--amber-dark); }
+.float-stat-label { font-size:.75rem; color:var(--gray-500); }
+.float-stat-value { font-size:1.1rem; font-weight:800; color:var(--gray-900); }
+
+.hero-float-card-2 {
+    position:absolute; top:30px; right:-20px;
+    background:var(--white); border-radius:var(--radius-md); padding:14px 18px;
+    box-shadow:var(--shadow-lg); border:1px solid var(--gray-200); z-index:3;
+    animation:floatY 5s ease-in-out infinite .5s;
+}
+
+/* ================================================================
+   STATS BAR
+   ================================================================ */
+.stats-bar {
+    padding:48px 0;
+    background:var(--navy);
+    color:var(--white);
+}
+.stats-grid {
+    display:grid; grid-template-columns:repeat(4,1fr); gap:32px;
+    text-align:center;
+}
+.stat-item h3 {
+    font-size:clamp(1.75rem,3vw,2.5rem); font-weight:900; color:var(--amber);
+    margin-bottom:4px;
+}
+.stat-item p { color:rgba(255,255,255,.7); font-size:.9rem; font-weight:500; }
+
+/* ================================================================
+   FEATURES SECTION
+   ================================================================ */
+.features { background:var(--gray-50); }
+.features-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+}
+.feature-card {
+    background:var(--white); border-radius:var(--radius-lg); padding:32px;
+    border:1px solid var(--gray-200); transition:all .3s ease;
+    position:relative; overflow:hidden;
+}
+.feature-card:hover {
+    transform:translateY(-4px); box-shadow:var(--shadow-lg);
+    border-color:var(--gray-300);
+}
+.feature-icon {
+    width:48px; height:48px; border-radius:var(--radius-sm);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:20px;
+}
+.feature-icon.navy { background:rgba(27,42,74,.08); color:var(--navy); }
+.feature-icon.amber { background:var(--amber-light); color:var(--amber-dark); }
+.feature-icon.green { background:var(--success-bg); color:var(--success); }
+.feature-icon.blue  { background:var(--info-bg); color:var(--info); }
+.feature-icon.red   { background:var(--error-bg); color:var(--error); }
+.feature-icon.purple { background:#F3E8FF; color:#7C3AED; }
+.feature-icon svg { width:24px; height:24px; }
+
+.feature-card h3 { margin-bottom:10px; }
+.feature-card p { font-size:.9rem; line-height:1.6; margin-bottom:16px; }
+.feature-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.feature-tag {
+    padding:4px 10px; border-radius:100px; font-size:.75rem; font-weight:600;
+    background:var(--gray-100); color:var(--gray-600);
+}
+
+/* ================================================================
+   HOW IT WORKS
+   ================================================================ */
+.how-it-works { background:var(--white); }
+.steps-grid {
+    display:grid; grid-template-columns:repeat(4,1fr); gap:32px;
+    position:relative;
+}
+.steps-grid::before {
+    content:''; position:absolute; top:36px; left:12%; right:12%;
+    height:2px; background:var(--gray-200);
+}
+.step-card { text-align:center; position:relative; z-index:1; }
+.step-number {
+    width:72px; height:72px; border-radius:50%; margin:0 auto 20px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.5rem; font-weight:900; background:var(--white);
+    border:2px solid var(--gray-200); color:var(--navy);
+    transition:all .3s;
+}
+.step-card:hover .step-number {
+    background:var(--amber); color:var(--gray-900);
+    border-color:var(--amber); box-shadow:0 4px 16px rgba(245,158,11,.3);
+}
+.step-card h4 { margin-bottom:8px; }
+.step-card p { font-size:.88rem; color:var(--gray-500); }
+
+/* ================================================================
+   PRODUCT SHOWCASE — Tab Switcher with Screenshots
+   ================================================================ */
+.showcase { background:var(--gray-50); }
+.showcase-tabs {
+    display:flex; justify-content:center; gap:8px; margin-bottom:48px;
+    flex-wrap:wrap;
+}
+.showcase-tab {
+    padding:10px 20px; border-radius:var(--radius-sm); font-size:.88rem;
+    font-weight:600; cursor:pointer; border:1.5px solid var(--gray-200);
+    background:var(--white); color:var(--gray-600); transition:all .2s;
+}
+.showcase-tab:hover { border-color:var(--gray-400); color:var(--gray-900); }
+.showcase-tab.active {
+    background:var(--navy); color:var(--white); border-color:var(--navy);
+}
+
+.showcase-content {
+    display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;
+}
+.showcase-info { }
+.showcase-info h3 { font-size:1.5rem; margin-bottom:16px; }
+.showcase-info p { margin-bottom:24px; line-height:1.7; }
+.showcase-list { display:flex; flex-direction:column; gap:12px; }
+.showcase-list-item {
+    display:flex; align-items:flex-start; gap:12px;
+    padding:12px 16px; border-radius:var(--radius-sm);
+    background:var(--white); border:1px solid var(--gray-200);
+}
+.showcase-list-item svg { width:20px; height:20px; color:var(--success); flex-shrink:0; margin-top:2px; }
+.showcase-list-item div { }
+.showcase-list-item strong { font-size:.9rem; color:var(--gray-900); display:block; margin-bottom:2px; }
+.showcase-list-item span { font-size:.82rem; color:var(--gray-500); }
+
+.showcase-visual {
+    border-radius:var(--radius-lg); overflow:hidden;
+    box-shadow:var(--shadow-xl); border:1px solid var(--gray-200);
+    position:relative;
+}
+.showcase-visual img {
+    width:100%; display:block; transition:opacity .4s ease;
+}
+.showcase-panel { display:none; }
+.showcase-panel.active { display:block; }
+
+/* ================================================================
+   WORKFLOW / ROLES
+   ================================================================ */
+.workflow { background:var(--white); }
+.roles-grid {
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); gap:16px;
+    margin-bottom:40px;
+}
+.role-card {
+    text-align:center; padding:24px 16px; border-radius:var(--radius-md);
+    border:1px solid var(--gray-200); background:var(--white);
+    transition:all .3s; cursor:pointer; position:relative;
+}
+.role-card:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); border-color:var(--amber); }
+.role-card::after {
+    content:'Click to learn more';
+    position:absolute; bottom:6px; left:50%; transform:translateX(-50%);
+    font-size:.6rem; color:var(--amber); opacity:0; transition:opacity .3s;
+    white-space:nowrap;
+}
+.role-card:hover::after { opacity:1; }
+.role-icon {
+    width:48px; height:48px; border-radius:50%; margin:0 auto 12px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(27,42,74,.06); color:var(--navy);
+}
+.role-icon svg { width:22px; height:22px; }
+.role-card h4 { font-size:.85rem; color:var(--gray-700); margin-bottom:4px; }
+.role-card p { font-size:.75rem; color:var(--gray-500); }
+
+/* Role Detail Modal */
+.role-modal-overlay {
+    position:fixed; inset:0; background:rgba(0,0,0,.5); backdrop-filter:blur(4px);
+    z-index:10000; display:flex; align-items:center; justify-content:center;
+    opacity:0; visibility:hidden; transition:all .3s ease;
+}
+.role-modal-overlay.active { opacity:1; visibility:visible; }
+.role-modal {
+    background:var(--white); border-radius:var(--radius-lg); max-width:520px; width:90%;
+    padding:0; box-shadow:0 25px 60px rgba(0,0,0,.25); transform:translateY(20px) scale(.97);
+    transition:transform .35s cubic-bezier(.22,1,.36,1); overflow:hidden;
+    max-height:90vh; overflow-y:auto;
+}
+.role-modal-overlay.active .role-modal { transform:translateY(0) scale(1); }
+.role-modal-header {
+    display:flex; align-items:center; gap:16px; padding:28px 28px 20px;
+    border-bottom:1px solid var(--gray-200); background:var(--gray-50);
+}
+.role-modal-header .role-icon {
+    width:56px; height:56px; margin:0; background:var(--amber); color:var(--white); flex-shrink:0;
+}
+.role-modal-header .role-icon svg { width:26px; height:26px; }
+.role-modal-header-text h3 { font-size:1.15rem; color:var(--navy); margin-bottom:2px; }
+.role-modal-header-text span { font-size:.8rem; color:var(--gray-500); }
+.role-modal-close {
+    position:absolute; top:16px; right:16px; width:32px; height:32px;
+    border:none; background:var(--gray-200); border-radius:50%; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--gray-600); transition:all .2s; font-size:1.1rem; line-height:1;
+}
+.role-modal-close:hover { background:var(--gray-300); color:var(--gray-800); }
+.role-modal-body { padding:24px 28px 28px; }
+.role-modal-body p { font-size:.9rem; color:var(--gray-600); line-height:1.7; margin-bottom:20px; }
+.role-modal-body h5 {
+    font-size:.75rem; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--gray-500); margin-bottom:10px; font-weight:600;
+}
+.role-permissions {
+    display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px;
+}
+.role-perm-tag {
+    font-size:.75rem; padding:5px 12px; border-radius:20px;
+    background:rgba(27,42,74,.06); color:var(--navy); font-weight:500;
+}
+.role-perm-tag.highlight {
+    background:var(--amber); color:var(--white);
+}
+
+.workflow-diagram {
+    background:var(--gray-50); border-radius:var(--radius-lg); padding:40px;
+    border:1px solid var(--gray-200);
+}
+.workflow-flow {
+    display:flex; align-items:center; justify-content:center; gap:16px;
+    flex-wrap:wrap;
+}
+.workflow-node {
+    padding:14px 24px; border-radius:var(--radius-sm);
+    font-size:.88rem; font-weight:600; text-align:center;
+}
+.workflow-node.start  { background:var(--info-bg); color:var(--info); border:1px solid rgba(37,99,235,.15); }
+.workflow-node.process { background:var(--white); color:var(--gray-700); border:1px solid var(--gray-200); }
+.workflow-node.check  { background:var(--warning-bg); color:var(--warning); border:1px solid rgba(217,119,6,.15); }
+.workflow-node.end    { background:var(--success-bg); color:var(--success); border:1px solid rgba(5,150,105,.15); }
+.workflow-arrow { color:var(--gray-400); font-size:1.2rem; }
+
+/* ================================================================
+   PRICING
+   ================================================================ */
+.pricing { background:var(--gray-50); }
+.pricing-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+    max-width:960px; margin:0 auto;
+}
+.pricing-card {
+    background:var(--white); border-radius:var(--radius-lg); padding:36px;
+    border:1px solid var(--gray-200); position:relative; transition:all .3s;
+}
+.pricing-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
+.pricing-card.featured {
+    border-color:var(--amber); box-shadow:0 0 0 1px var(--amber), var(--shadow-lg);
+}
+.pricing-card.featured::before {
+    content:'Most Popular'; position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+    padding:4px 16px; background:var(--amber); color:var(--gray-900);
+    border-radius:100px; font-size:.75rem; font-weight:700;
+}
+.pricing-label { font-size:.88rem; font-weight:700; color:var(--gray-500); text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px; }
+.pricing-price { font-size:2.5rem; font-weight:900; color:var(--gray-900); margin-bottom:4px; }
+.pricing-price span { font-size:.9rem; font-weight:500; color:var(--gray-500); }
+.pricing-desc { font-size:.9rem; color:var(--gray-500); margin-bottom:24px; padding-bottom:24px; border-bottom:1px solid var(--gray-200); }
+.pricing-features { display:flex; flex-direction:column; gap:10px; margin-bottom:28px; }
+.pricing-feat {
+    display:flex; align-items:center; gap:10px; font-size:.88rem; color:var(--gray-700);
+}
+.pricing-feat svg { width:18px; height:18px; color:var(--success); flex-shrink:0; }
+.pricing-card .btn { width:100%; }
+
+/* ================================================================
+   TESTIMONIALS
+   ================================================================ */
+.testimonials { background:var(--white); }
+.testimonials-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+}
+.testimonial-card {
+    background:var(--gray-50); border-radius:var(--radius-lg); padding:32px;
+    border:1px solid var(--gray-200);
+}
+.testimonial-stars { display:flex; gap:2px; margin-bottom:16px; }
+.testimonial-stars svg { width:18px; height:18px; color:var(--amber); }
+.testimonial-card blockquote {
+    font-size:.95rem; color:var(--gray-700); line-height:1.7;
+    margin-bottom:20px; font-style:italic;
+}
+.testimonial-author {
+    display:flex; align-items:center; gap:12px;
+    padding-top:16px; border-top:1px solid var(--gray-200);
+}
+.testimonial-avatar {
+    width:44px; height:44px; border-radius:50%; background:var(--navy);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--white); font-weight:700; font-size:.95rem;
+}
+.testimonial-meta strong { font-size:.88rem; display:block; color:var(--gray-900); }
+.testimonial-meta span { font-size:.8rem; color:var(--gray-500); }
+
+/* ================================================================
+   CTA SECTION
+   ================================================================ */
+.cta-section {
+    padding:96px 0;
+    background:var(--navy);
+    color:var(--white);
+    text-align:center;
+    position:relative; overflow:hidden;
+}
+.cta-section::before {
+    content:''; position:absolute; top:-200px; right:-200px;
+    width:500px; height:500px; border-radius:50%;
+    background:radial-gradient(circle, rgba(245,158,11,.1) 0%, transparent 60%);
+}
+.cta-section h2 { color:var(--white); margin-bottom:16px; }
+.cta-section p { color:rgba(255,255,255,.7); font-size:1.1rem; max-width:580px; margin:0 auto 36px; }
+.cta-buttons { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+
+/* ================================================================
+   APP DOWNLOAD
+   ================================================================ */
+.app-download {
+    background:var(--gray-50); padding:80px 0;
+}
+.app-inner {
+    display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;
+}
+.app-badges { display:flex; gap:16px; margin-top:24px; flex-wrap:wrap; }
+.app-badge {
+    display:inline-flex; align-items:center; gap:10px;
+    padding:10px 20px; background:var(--gray-900); color:var(--white);
+    border-radius:var(--radius-sm); transition:all .2s;
+}
+.app-badge:hover { background:var(--gray-800); transform:translateY(-2px); }
+.app-badge svg { width:24px; height:24px; }
+.app-badge-text { text-align:left; }
+.app-badge-text small { font-size:.6rem; display:block; opacity:.8; letter-spacing:.05em; text-transform:uppercase; }
+.app-badge-text strong { font-size:.95rem; }
+
+.app-phones { position:relative; display:flex; justify-content:center; }
+.phone-mockup {
+    width:240px; background:var(--white); border-radius:32px;
+    box-shadow:var(--shadow-xl); border:1px solid var(--gray-200);
+    overflow:hidden; padding:8px;
+}
+.phone-screen { border-radius:24px; overflow:hidden; }
+.phone-screen img { width:100%; display:block; }
+.phone-mockup:last-child {
+    position:absolute; right:0; top:40px;
+    transform:rotate(5deg) scale(.9);
+}
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+.site-footer {
+    background:var(--gray-900); color:rgba(255,255,255,.7); padding:72px 0 32px;
+}
+.footer-grid {
+    display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px;
+    margin-bottom:48px;
+}
+.footer-brand { }
+.footer-logo { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+.footer-logo img { height:40px; filter:drop-shadow(0 1px 2px rgba(0,0,0,.2)); }
+.footer-logo strong { font-size:1.15rem; color:var(--white); }
+.footer-brand p { font-size:.9rem; line-height:1.6; margin-bottom:20px; }
+.footer-social { display:flex; gap:12px; }
+.footer-social a {
+    width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.08);
+    display:flex; align-items:center; justify-content:center;
+    transition:background .2s;
+}
+.footer-social a:hover { background:rgba(255,255,255,.15); }
+.footer-social svg { width:18px; height:18px; color:rgba(255,255,255,.7); }
+
+.footer-col h4 { color:var(--white); font-size:.88rem; margin-bottom:20px; text-transform:uppercase; letter-spacing:.05em; }
+.footer-col a {
+    display:block; font-size:.88rem; color:rgba(255,255,255,.6);
+    padding:4px 0; transition:color .2s;
+}
+.footer-col a:hover { color:var(--white); }
+
+.footer-bottom {
+    padding-top:32px; border-top:1px solid rgba(255,255,255,.1);
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:.82rem;
+}
+.footer-bottom a { color:rgba(255,255,255,.5); margin-left:24px; transition:color .2s; }
+.footer-bottom a:hover { color:var(--white); }
+
+/* ================================================================
+   SCROLL REVEAL ANIMATION
+   ================================================================ */
+.reveal {
+    opacity:0; transform:translateY(24px);
+    transition:opacity .6s ease, transform .6s ease;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width:1024px) {
+    .hero-grid { grid-template-columns:1fr; gap:48px; text-align:center; }
+    .hero-desc { margin-left:auto; margin-right:auto; }
+    .hero-cta { justify-content:center; }
+    .hero-trust { justify-content:center; }
+    .hero-float-card, .hero-float-card-2 { display:none; }
+    .features-grid { grid-template-columns:repeat(2,1fr); }
+    .steps-grid { grid-template-columns:repeat(2,1fr); }
+    .steps-grid::before { display:none; }
+    .showcase-content { grid-template-columns:1fr; }
+    .pricing-grid { grid-template-columns:1fr; max-width:400px; }
+    .testimonials-grid { grid-template-columns:1fr; }
+    .app-inner { grid-template-columns:1fr; text-align:center; }
+    .app-badges { justify-content:center; }
+    .footer-grid { grid-template-columns:1fr 1fr; }
+}
+
+@media (max-width:768px) {
+    section { padding:64px 0; }
+    .main-nav { display:none; }
+    .header-actions .btn-outline { display:none; }
+    .mobile-toggle { display:block; }
+    h1 { font-size:2rem; }
+    h2 { font-size:1.6rem; }
+    .features-grid { grid-template-columns:1fr; }
+    .steps-grid { grid-template-columns:1fr; }
+    .pricing-grid { grid-template-columns:1fr; }
+    .showcase-tabs { gap:4px; }
+    .showcase-tab { padding:8px 14px; font-size:.8rem; }
+    .roles-grid { grid-template-columns:repeat(2,1fr); }
+    .footer-grid { grid-template-columns:1fr; }
+    .footer-bottom { flex-direction:column; gap:12px; text-align:center; }
+}
+
+@media (max-width:480px) {
+    .container { padding:0 16px; }
+    .hero { padding:112px 0 48px; }
+    .hero-cta { flex-direction:column; align-items:center; }
+    .hero-trust { flex-direction:column; align-items:center; gap:8px; }
+    .stats-grid { grid-template-columns:repeat(2,1fr); gap:24px; }
+}
+    </style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="site-header" id="siteHeader">
+    <div class="header-inner">
+        <a href="https://www.buildersnova.com" class="logo">
+            <img src="logo.png" alt="Builders Nova">
+            <div class="logo-text">Builders Nova<span>Building Better Tomorrow</span></div>
+        </a>
+
+        <nav class="main-nav" id="mainNav">
+            <a href="#features">Features</a>
+            <a href="#showcase">Product</a>
+            <a href="#workflow">Workflow</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#testimonials">Reviews</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="https://www.buildersnova.com" class="btn btn-outline btn-sm">Sign In</a>
+            <a href="https://www.buildersnova.com" class="btn btn-primary btn-sm">Request Demo</a>
+        </div>
+
+        <button class="mobile-toggle" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="Menu">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#features" onclick="document.getElementById('mobileMenu').classList.remove('open')">Features</a>
+        <a href="#showcase" onclick="document.getElementById('mobileMenu').classList.remove('open')">Product</a>
+        <a href="#workflow" onclick="document.getElementById('mobileMenu').classList.remove('open')">Workflow</a>
+        <a href="#pricing" onclick="document.getElementById('mobileMenu').classList.remove('open')">Pricing</a>
+        <a href="#testimonials" onclick="document.getElementById('mobileMenu').classList.remove('open')">Reviews</a>
+        <a href="https://www.buildersnova.com" class="btn btn-outline">Sign In</a>
+        <a href="https://www.buildersnova.com" class="btn btn-primary">Request Demo</a>
+    </div>
+</header>
+
+<!-- ============================================================
+     HERO SECTION
+     ============================================================ -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-grid">
+            <div class="hero-content reveal">
+                <div class="hero-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    #1 Construction Management Platform
+                </div>
+                <h1>Deliver Every Project On Time & Under Budget — with <em>Real-Time Site Control.</em></h1>
+                <p class="hero-desc">Track daily site reports, automate material indents, manage purchase orders, and keep your entire team connected — all from one platform.</p>
+                <div class="hero-cta">
+                    <a href="https://www.buildersnova.com" class="btn btn-primary btn-lg">Start Free Trial</a>
+                    <a href="https://www.buildersnova.com" class="btn btn-outline btn-lg">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/></svg>
+                        Watch Demo
+                    </a>
+                </div>
+                <div class="hero-trust">
+                    <span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        No credit card required
+                    </span>
+                    <span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        14-day free trial
+                    </span>
+                    <span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Setup in 5 minutes
+                    </span>
+                </div>
+            </div>
+
+            <div class="hero-visual reveal">
+                <div class="hero-browser">
+                    <div class="browser-bar">
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                        <div class="browser-url">app.buildersnova.com/dashboard</div>
+                    </div>
+                    <img src="screenshot-dashboard.png" alt="Builders Nova Dashboard" loading="lazy">
+                </div>
+
+                <div class="hero-float-card">
+                    <div class="float-icon green">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    </div>
+                    <div>
+                        <div class="float-stat-label">Active Sites</div>
+                        <div class="float-stat-value">247</div>
+                    </div>
+                </div>
+
+                <div class="hero-float-card-2">
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        <div class="float-icon amber">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+                        </div>
+                        <div>
+                            <div class="float-stat-label">On-time Delivery</div>
+                            <div class="float-stat-value" style="color:var(--success);">99.2%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     STATS BAR
+     ============================================================ -->
+<section class="stats-bar">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item reveal">
+                <h3><span class="counter" data-target="50000">0</span>+</h3>
+                <p>Projects Managed</p>
+            </div>
+            <div class="stat-item reveal">
+                <h3><span class="counter" data-target="15">0</span>+ hrs</h3>
+                <p>Saved Per Week / Manager</p>
+            </div>
+            <div class="stat-item reveal">
+                <h3><span class="counter" data-target="99">0</span>.8%</h3>
+                <p>On-Time Material Delivery</p>
+            </div>
+            <div class="stat-item reveal">
+                <h3><span class="counter" data-target="500">0</span>+</h3>
+                <p>Construction Companies</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     FEATURES SECTION
+     ============================================================ -->
+<section class="features" id="features">
+    <div class="container">
+        <div class="section-heading reveal">
+            <div class="section-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                Core Features
+            </div>
+            <h2>Everything You Need to Run Your Construction Site</h2>
+            <p>From daily reports to financial tracking — one platform to manage projects, people, materials, and money.</p>
+        </div>
+
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card reveal">
+                <div class="feature-icon navy">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <h3>Daily Site Reports (DSR)</h3>
+                <p>One-tap daily reporting with photo uploads, manpower tracking, and a 3-tier approval workflow (Site Engineer → Manager → Admin).</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">Photo Uploads</span>
+                    <span class="feature-tag">3-Tier Approval</span>
+                    <span class="feature-tag">Auto WSR</span>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card reveal">
+                <div class="feature-icon amber">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                </div>
+                <h3>Material Indents & PO</h3>
+                <p>Streamline procurement from site request to purchase order, with inventory-first validation ensuring stock checks before ordering.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">Indent Pipeline</span>
+                    <span class="feature-tag">PO Approval</span>
+                    <span class="feature-tag">Stock Check</span>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card reveal">
+                <div class="feature-icon green">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                </div>
+                <h3>Inventory Management</h3>
+                <p>Real-time stock tracking with stock movement audit trails, receipt vs. indent reconciliation, and low-stock alerts.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">Live Stock</span>
+                    <span class="feature-tag">Audit Trail</span>
+                    <span class="feature-tag">Alerts</span>
+                </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-card reveal">
+                <div class="feature-icon blue">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                </div>
+                <h3>Payments & Accounts</h3>
+                <p>Track labour and vendor payments with digital signature capture, payment status tracking, and complete financial visibility.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">Digital Sign</span>
+                    <span class="feature-tag">Payment Track</span>
+                    <span class="feature-tag">Reports</span>
+                </div>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="feature-card reveal">
+                <div class="feature-icon purple">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h3>Team & Workforce</h3>
+                <p>7-role Maker-Checker architecture with Admin, Supervisor, Site Engineer, Site Manager, Project Manager, Procurement Manager, and Accountant roles.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">7 Roles</span>
+                    <span class="feature-tag">Maker-Checker</span>
+                    <span class="feature-tag">Permissions</span>
+                </div>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="feature-card reveal">
+                <div class="feature-icon red">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+                </div>
+                <h3>Analytics & Reports</h3>
+                <p>DSR submission trends, procurement pipeline analytics, budget utilization, project progress dashboards, and exportable reports.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">Dashboards</span>
+                    <span class="feature-tag">Trends</span>
+                    <span class="feature-tag">Export</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     HOW IT WORKS
+     ============================================================ -->
+<section class="how-it-works" id="how-it-works">
+    <div class="container">
+        <div class="section-heading reveal">
+            <div class="section-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                How It Works
+            </div>
+            <h2>Get Started in 4 Simple Steps</h2>
+            <p>From sign-up to managing your first project — it takes less than 5 minutes.</p>
+        </div>
+
+        <div class="steps-grid">
+            <div class="step-card reveal">
+                <div class="step-number">1</div>
+                <h4>Create Account</h4>
+                <p>Sign up for free and set up your company profile in under 2 minutes.</p>
+            </div>
+            <div class="step-card reveal">
+                <div class="step-number">2</div>
+                <h4>Add Projects</h4>
+                <p>Create your construction projects with sites, towers, and unit details.</p>
+            </div>
+            <div class="step-card reveal">
+                <div class="step-number">3</div>
+                <h4>Invite Your Team</h4>
+                <p>Assign roles — Engineers, Supervisors, Managers — with role-based access.</p>
+            </div>
+            <div class="step-card reveal">
+                <div class="step-number">4</div>
+                <h4>Start Managing</h4>
+                <p>File DSRs, raise indents, track inventory, and manage payments — all in one place.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     PRODUCT SHOWCASE (Screenshot Gallery)
+     ============================================================ -->
+<section class="showcase" id="showcase">
+    <div class="container">
+        <div class="section-heading reveal">
+            <div class="section-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                Product Showcase
+            </div>
+            <h2>See Builders Nova in Action</h2>
+            <p>Explore the platform modules that help you manage every aspect of your construction projects.</p>
+        </div>
+
+        <div class="showcase-tabs reveal">
+            <button class="showcase-tab active" onclick="switchShowcase('dashboard', this)">Dashboard</button>
+            <button class="showcase-tab" onclick="switchShowcase('dsr', this)">Daily Reports</button>
+            <button class="showcase-tab" onclick="switchShowcase('wsr', this)">Weekly Reports</button>
+            <button class="showcase-tab" onclick="switchShowcase('indent', this)">Material Indents</button>
+            <button class="showcase-tab" onclick="switchShowcase('inventory', this)">Inventory</button>
+            <button class="showcase-tab" onclick="switchShowcase('payments', this)">Payments</button>
+        </div>
+
+        <!-- Dashboard Panel -->
+        <div class="showcase-panel active" id="panel-dashboard">
+            <div class="showcase-content reveal">
+                <div class="showcase-info">
+                    <h3>Executive Dashboard</h3>
+                    <p>Get a bird's-eye view of all your projects with KPI cards, DSR submission trends, and procurement pipeline status — all updated in real time.</p>
+                    <div class="showcase-list">
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>Real-Time KPI Cards</strong><span>Active projects, pending approvals, budget utilization</span></div>
+                        </div>
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>DSR Submission Trend</strong><span>Track daily report filing patterns across all sites</span></div>
+                        </div>
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>Procurement Pipeline</strong><span>Monitor indent-to-PO conversion and delivery status</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-visual">
+                    <img src="screenshot-dashboard.png" alt="Builders Nova Dashboard" id="showcase-img">
+                </div>
+            </div>
+        </div>
+
+        <!-- DSR Panel -->
+        <div class="showcase-panel" id="panel-dsr">
+            <div class="showcase-content reveal">
+                <div class="showcase-info">
+                    <h3>Daily Site Reports</h3>
+                    <p>File daily reports in minutes with structured forms for labour count, materials used, work progress, and photo documentation.</p>
+                    <div class="showcase-list">
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>Structured Labour Tracking</strong><span>Track skilled, unskilled, and contractor labour daily</span></div>
+                        </div>
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>3-Tier Approval Workflow</strong><span>Site Engineer → Site Manager → Admin chain</span></div>
+                        </div>
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>Photo & Video Attachments</strong><span>Document progress with rich media evidence</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-visual">
+                    <img src="screenshot-dsr.png" alt="Daily Site Report">
+                </div>
+            </div>
+        </div>
+
+        <!-- WSR Panel -->
+        <div class="showcase-panel" id="panel-wsr">
+            <div class="showcase-content reveal">
+                <div class="showcase-info">
+                    <h3>Weekly Site Reports</h3>
+                    <p>Auto-generated weekly summaries compiled from daily reports with built-in duplicate prevention to ensure data accuracy.</p>
+                    <div class="showcase-list">
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>Auto-Summarization</strong><span>Automatically compile from submitted DSRs</span></div>
+                        </div>
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>Duplicate Prevention</strong><span>Smart detection prevents overlapping report periods</span></div>
+                        </div>
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>Exportable Reports</strong><span>Download and share with stakeholders</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-visual">
+                    <img src="screenshot-wsr.png" alt="Weekly Site Report">
+                </div>
+            </div>
+        </div>
+
+        <!-- Indent Panel -->
+        <div class="showcase-panel" id="panel-indent">
+            <div class="showcase-content reveal">
+                <div class="showcase-info">
+                    <h3>Material Indents</h3>
+                    <p>Raise material indents digitally with project and category mapping, automatic stock validation, and multi-level approval workflows.</p>
+                    <div class="showcase-list">
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>Inventory-First Validation</strong><span>Check existing stock before raising new indents</span></div>
+                        </div>
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>Category & Project Mapping</strong><span>Organize indents by material type and project</span></div>
+                        </div>
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>Approval Pipeline</strong><span>Multi-level approvals with notification alerts</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-visual">
+                    <img src="screenshot-indent.png" alt="Material Indent">
+                </div>
+            </div>
+        </div>
+
+        <!-- Inventory Panel -->
+        <div class="showcase-panel" id="panel-inventory">
+            <div class="showcase-content reveal">
+                <div class="showcase-info">
+                    <h3>Inventory Management</h3>
+                    <p>Track every material — cement, bricks, steel, sand, tiles — with real-time quantities, receipt tracking, and stock movement history.</p>
+                    <div class="showcase-list">
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>Complete Material Catalog</strong><span>Manage all materials with categories and units</span></div>
+                        </div>
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>Stock Movement Audit</strong><span>Full audit trail for every stock transaction</span></div>
+                        </div>
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>Low-Stock Alerts</strong><span>Get notified when materials run below threshold</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-visual">
+                    <img src="screenshot-inventory.png" alt="Inventory Management">
+                </div>
+            </div>
+        </div>
+
+        <!-- Payments Panel -->
+        <div class="showcase-panel" id="panel-payments">
+            <div class="showcase-content reveal">
+                <div class="showcase-info">
+                    <h3>Payments & Accounts</h3>
+                    <p>Manage labour and vendor payments with digital signature capture, payment history, and complete financial transparency.</p>
+                    <div class="showcase-list">
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>Digital Signature Capture</strong><span>Collect signatures on mobile for payment receipts</span></div>
+                        </div>
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>Payment Status Tracking</strong><span>Pending, approved, completed — track every rupee</span></div>
+                        </div>
+                        <div class="showcase-list-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <div><strong>Financial Reports</strong><span>Export payment summaries for accounting</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-visual">
+                    <img src="screenshot-payments.png" alt="Payments & Accounts">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============================================================
+     WORKFLOW / ROLES
+     ============================================================ -->
+<section class="workflow" id="workflow">
+    <div class="container">
+        <div class="section-heading reveal">
+            <div class="section-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
+                Role-Based Access
+            </div>
+            <h2>7-Role Maker-Checker Architecture</h2>
+            <p>Every team member gets the right access — from site engineers filing DSRs to admins approving payments.</p>
+        </div>
+
+        <div class="roles-grid reveal">
+            <div class="role-card" data-role="admin">
+                <div class="role-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                </div>
+                <h4>Admin</h4>
+                <p>Full access</p>
+            </div>
+            <div class="role-card" data-role="project-manager">
+                <div class="role-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <h4>Project Manager</h4>
+                <p>Project oversight</p>
+            </div>
+            <div class="role-card" data-role="site-manager">
+                <div class="role-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                </div>
+                <h4>Site Manager</h4>
+                <p>Site operations</p>
+            </div>
+            <div class="role-card" data-role="site-engineer">
+                <div class="role-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <h4>Site Engineer</h4>
+                <p>DSR filing</p>
+            </div>
+            <div class="role-card" data-role="supervisor">
+                <div class="role-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <h4>Supervisor</h4>
+                <p>Site monitoring</p>
+            </div>
+            <div class="role-card" data-role="procurement-mgr">
+                <div class="role-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                </div>
+                <h4>Procurement Mgr</h4>
+                <p>PO &amp; vendors</p>
+            </div>
+            <div class="role-card" data-role="accountant">
+                <div class="role-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                </div>
+                <h4>Accountant</h4>
+                <p>Finance &amp; payments</p>
+            </div>
+        </div>
+
+        <!-- Procurement Workflow -->
+        <div class="workflow-diagram reveal">
+            <h4 style="text-align:center;margin-bottom:24px;color:var(--gray-700);">Inventory-First Procurement Workflow</h4>
+            <div class="workflow-flow">
+                <div class="workflow-node start">Site Raises Indent</div>
+                <div class="workflow-arrow">→</div>
+                <div class="workflow-node check">Check Stock</div>
+                <div class="workflow-arrow">→</div>
+                <div class="workflow-node process">Manager Approves</div>
+                <div class="workflow-arrow">→</div>
+                <div class="workflow-node process">PO Created</div>
+                <div class="workflow-arrow">→</div>
+                <div class="workflow-node process">Vendor Ships</div>
+                <div class="workflow-arrow">→</div>
+                <div class="workflow-node end">Stock Updated</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     PRICING
+     ============================================================ -->
+<section class="pricing" id="pricing">
+    <div class="container">
+        <div class="section-heading reveal">
+            <div class="section-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                Pricing Plans
+            </div>
+            <h2>Simple, Transparent Pricing</h2>
+            <p>Start free, scale as you grow. No hidden fees.</p>
+        </div>
+
+        <div class="pricing-grid reveal">
+            <!-- Starter -->
+            <div class="pricing-card">
+                <div class="pricing-label">Starter</div>
+                <div class="pricing-price">Free<span></span></div>
+                <div class="pricing-desc">For small teams getting started with construction management.</div>
+                <div class="pricing-features">
+                    <div class="pricing-feat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Up to 3 projects
+                    </div>
+                    <div class="pricing-feat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        5 team members
+                    </div>
+                    <div class="pricing-feat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Basic DSR & Inventory
+                    </div>
+                    <div class="pricing-feat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Email support
+                    </div>
+                </div>
+                <a href="https://www.buildersnova.com" class="btn btn-outline">Get Started Free</a>
+            </div>
+
+            <!-- Professional -->
+            <div class="pricing-card featured">
+                <div class="pricing-label">Professional</div>
+                <div class="pricing-price">&#8377;1,499<span>/month</span></div>
+                <div class="pricing-desc">For growing construction companies managing multiple sites.</div>
+                <div class="pricing-features">
+                    <div class="pricing-feat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Unlimited projects
+                    </div>
+                    <div class="pricing-feat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        25 team members
+                    </div>
+                    <div class="pricing-feat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Full DSR/WSR + Procurement
+                    </div>
+                    <div class="pricing-feat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Analytics dashboard
+                    </div>
+                    <div class="pricing-feat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Priority support
+                    </div>
+                </div>
+                <a href="https://www.buildersnova.com" class="btn btn-primary">Start Free Trial</a>
+            </div>
+
+            <!-- Enterprise -->
+            <div class="pricing-card">
+                <div class="pricing-label">Enterprise</div>
+                <div class="pricing-price">Custom<span></span></div>
+                <div class="pricing-desc">For large builders and developers with advanced needs.</div>
+                <div class="pricing-features">
+                    <div class="pricing-feat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Everything in Professional
+                    </div>
+                    <div class="pricing-feat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Unlimited team members
+                    </div>
+                    <div class="pricing-feat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Custom integrations
+                    </div>
+                    <div class="pricing-feat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        Dedicated account manager
+                    </div>
+                    <div class="pricing-feat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        SLA & on-premise option
+                    </div>
+                </div>
+                <a href="https://www.buildersnova.com" class="btn btn-navy">Contact Sales</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     TESTIMONIALS
+     ============================================================ -->
+<section class="testimonials" id="testimonials">
+    <div class="container">
+        <div class="section-heading reveal">
+            <div class="section-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Testimonials
+            </div>
+            <h2>Trusted by Construction Professionals</h2>
+            <p>Hear what our users have to say about transforming their construction management.</p>
+        </div>
+
+        <div class="testimonials-grid reveal">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <blockquote>"Builders Nova transformed how we manage our 12 construction sites. DSR filing went from 45 minutes to 5 minutes per site. The procurement workflow alone saved us lakhs."</blockquote>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">RA</div>
+                    <div class="testimonial-meta">
+                        <strong>Rajesh Agarwal</strong>
+                        <span>MD, Agarwal Constructions</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-stars">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <blockquote>"The inventory-first procurement workflow is genius. We no longer double-order materials. Real-time stock tracking means zero wastage on our ₹50 crore project."</blockquote>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">PS</div>
+                    <div class="testimonial-meta">
+                        <strong>Priya Sharma</strong>
+                        <span>Project Manager, Pinnacle Infra</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-stars">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <blockquote>"Our site engineers love the mobile app. They file DSRs right from the site with photos. The 3-tier approval means nothing slips through. Best tool we've adopted in years."</blockquote>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">VK</div>
+                    <div class="testimonial-meta">
+                        <strong>Vikram Kulkarni</strong>
+                        <span>CEO, Metro Builders</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     APP DOWNLOAD
+     ============================================================ -->
+<section class="app-download">
+    <div class="container">
+        <div class="app-inner">
+            <div class="reveal">
+                <div class="section-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                    Mobile App
+                </div>
+                <h2 style="text-align:left;">Manage Sites<br>from Anywhere</h2>
+                <p style="margin-top:16px;max-width:480px;">File DSRs, raise indents, approve POs, and track payments — all from your phone. Available on iOS and Android.</p>
+                <div class="app-badges">
+                    <a href="https://www.buildersnova.com" class="app-badge">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.32 2.32-1.55 4.3-3.74 4.25z"/></svg>
+                        <div class="app-badge-text">
+                            <small>Download on the</small>
+                            <strong>App Store</strong>
+                        </div>
+                    </a>
+                    <a href="https://www.buildersnova.com" class="app-badge">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.78L14.15 12.8l-3.8-3.8L3.18 16v7.78zM20.82.22L14.15 6.9l3.8 3.8L20.82.22zM3.18.22v7.78l7.17 7.17 3.8-3.8L3.18.22zM14.15 12.8l-3.8 3.8 7.17 7.18h3.3L14.15 12.8z"/></svg>
+                        <div class="app-badge-text">
+                            <small>Get it on</small>
+                            <strong>Google Play</strong>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="app-phones reveal">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <img src="screenshot-dsr.png" alt="Builders Nova Mobile - DSR">
+                    </div>
+                </div>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <img src="screenshot-inventory.png" alt="Builders Nova Mobile - Inventory">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     CTA SECTION
+     ============================================================ -->
+<section class="cta-section">
+    <div class="container reveal">
+        <h2>Ready to Transform Your Construction Management?</h2>
+        <p>Join 500+ construction companies already using Builders Nova to eliminate delays, reduce costs, and manage sites efficiently.</p>
+        <div class="cta-buttons">
+            <a href="https://www.buildersnova.com" class="btn btn-primary btn-lg">Start Free 14-Day Trial</a>
+            <a href="https://www.buildersnova.com" class="btn btn-white btn-lg">Schedule a Demo</a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="Builders Nova">
+                    <strong>Builders Nova</strong>
+                </div>
+                <p>The all-in-one construction site management platform. Manage projects, sites, materials, teams, and finances — all from one place.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="white"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Product</h4>
+                <a href="#features">Features</a>
+                <a href="#showcase">Product Tour</a>
+                <a href="#pricing">Pricing</a>
+                <a href="https://www.buildersnova.com">Mobile App</a>
+                <a href="https://www.buildersnova.com">API Docs</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Solutions</h4>
+                <a href="https://www.buildersnova.com">For Developers</a>
+                <a href="https://www.buildersnova.com">For Contractors</a>
+                <a href="https://www.buildersnova.com">For Project Managers</a>
+                <a href="https://www.buildersnova.com">For Site Engineers</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Company</h4>
+                <a href="https://www.buildersnova.com">About Us</a>
+                <a href="https://www.buildersnova.com">Blog</a>
+                <a href="https://www.buildersnova.com">Careers</a>
+                <a href="https://www.buildersnova.com">Contact</a>
+                <a href="https://www.buildersnova.com">Privacy Policy</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>&copy; 2024 Builders Nova. All rights reserved.</span>
+            <div>
+                <a href="https://www.buildersnova.com">Terms of Service</a>
+                <a href="https://www.buildersnova.com">Privacy Policy</a>
+                <a href="https://www.buildersnova.com">Cookie Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+// Header Scroll Effect
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Scroll Reveal
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// Counter Animation
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const counter = entry.target;
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 2000;
+            const start = performance.now();
+
+            function animate(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 4);
+                const current = Math.floor(eased * target);
+
+                if (target >= 1000) {
+                    counter.textContent = current.toLocaleString('en-IN');
+                } else {
+                    counter.textContent = current;
+                }
+
+                if (progress < 1) requestAnimationFrame(animate);
+                else counter.textContent = target >= 1000 ? target.toLocaleString('en-IN') : target;
+            }
+
+            requestAnimationFrame(animate);
+            counterObserver.unobserve(counter);
+        }
+    });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+// Product Showcase Tab Switcher
+window.switchShowcase = function(tab, btnElement) {
+    // Update tabs
+    document.querySelectorAll('.showcase-tab').forEach(t => t.classList.remove('active'));
+    btnElement.classList.add('active');
+
+    // Update panels
+    document.querySelectorAll('.showcase-panel').forEach(p => p.classList.remove('active'));
+    const panel = document.getElementById('panel-' + tab);
+    if (panel) {
+        panel.classList.add('active');
+        // Re-trigger reveal for the new panel content
+        const revealEl = panel.querySelector('.reveal');
+        if (revealEl && !revealEl.classList.contains('visible')) {
+            revealEl.classList.add('visible');
+        }
+    }
+};
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+</script>
+
+<!-- Role Detail Modal -->
+<div class="role-modal-overlay" id="roleModalOverlay">
+    <div class="role-modal" style="position:relative;">
+        <button class="role-modal-close" id="roleModalClose">&times;</button>
+        <div class="role-modal-header">
+            <div class="role-icon" id="roleModalIcon"></div>
+            <div class="role-modal-header-text">
+                <h3 id="roleModalTitle"></h3>
+                <span id="roleModalSubtitle"></span>
+            </div>
+        </div>
+        <div class="role-modal-body">
+            <p id="roleModalDesc"></p>
+            <h5>Key Permissions</h5>
+            <div class="role-permissions" id="roleModalPerms"></div>
+            <h5>Accessible Modules</h5>
+            <div class="role-permissions" id="roleModalModules"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Role detail data
+const roleData = {
+    'admin': {
+        title: 'Admin',
+        subtitle: 'Full access',
+        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
+        desc: 'The Admin has complete control over the BuildersNova workspace. They can create projects, manage users, assign roles, configure approval workflows, and access every module including financials. Admins serve as the final approvers in the 3-tier workflow chain and can override or escalate any pending action.',
+        permissions: ['Create & Delete Projects', 'Manage All Users', 'Final Approval Authority', 'Configure Workflows', 'Access Financials', 'Export Reports'],
+        modules: ['Dashboard', 'DSR', 'Indents', 'Purchase Orders', 'Inventory', 'Payments', 'Reports', 'Settings'],
+        highlights: ['Final Approval Authority', 'Configure Workflows']
+    },
+    'project-manager': {
+        title: 'Project Manager',
+        subtitle: 'Project oversight',
+        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+        desc: 'Project Managers oversee the entire lifecycle of assigned projects. They review and approve Daily Site Reports (DSRs), monitor project-level budgets, track material consumption, and ensure timelines are met. They act as the second-tier approver in the workflow chain between Site Managers and Admins.',
+        permissions: ['View All Project Data', 'Approve/Reject DSRs', 'Monitor Budgets', '2nd-Tier Approvals', 'Generate Project Reports', 'View Payment Status'],
+        modules: ['Dashboard', 'DSR', 'Indents', 'Purchase Orders', 'Inventory', 'Reports'],
+        highlights: ['2nd-Tier Approvals', 'Monitor Budgets']
+    },
+    'site-manager': {
+        title: 'Site Manager',
+        subtitle: 'Site operations',
+        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
+        desc: 'Site Managers are responsible for day-to-day operations at the construction site. They review DSRs submitted by Site Engineers, approve or reject material indent requests, manage on-site workforce allocation, and coordinate with the Procurement team. They are the first-tier approvers in the workflow chain.',
+        permissions: ['Review & Approve DSRs', 'Approve Material Indents', 'Manage Workforce', '1st-Tier Approvals', 'Raise Indent Requests', 'View Site Inventory'],
+        modules: ['Dashboard', 'DSR', 'Indents', 'Inventory', 'Weekly Reports'],
+        highlights: ['1st-Tier Approvals', 'Approve Material Indents']
+    },
+    'site-engineer': {
+        title: 'Site Engineer',
+        subtitle: 'DSR filing',
+        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+        desc: 'Site Engineers are the ground-level reporters on the construction site. They file Daily Site Reports (DSRs) with photo uploads, track manpower and equipment usage, log work progress by activity, and raise material indent requests when supplies run low. Their reports flow up through the 3-tier approval chain.',
+        permissions: ['File Daily Site Reports', 'Upload Site Photos', 'Track Manpower', 'Raise Material Indents', 'Log Work Progress', 'View Own Reports'],
+        modules: ['DSR (Create & Edit)', 'Indents (Raise)', 'Dashboard (Read-only)'],
+        highlights: ['File Daily Site Reports', 'Raise Material Indents']
+    },
+    'supervisor': {
+        title: 'Supervisor',
+        subtitle: 'Site monitoring',
+        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
+        desc: 'Supervisors have a read-only monitoring role focused on site activity oversight. They can view DSRs, track workforce attendance, monitor material deliveries, and observe project progress — without the ability to approve or modify records. Ideal for owners or stakeholders who need visibility without operational control.',
+        permissions: ['View All DSRs', 'Monitor Workforce', 'Track Deliveries', 'View Progress Reports', 'Read-Only Dashboard', 'No Approval Rights'],
+        modules: ['Dashboard (Read-only)', 'DSR (View)', 'Inventory (View)', 'Reports (View)'],
+        highlights: ['Read-Only Dashboard', 'Monitor Workforce']
+    },
+    'procurement-mgr': {
+        title: 'Procurement Manager',
+        subtitle: 'PO & vendors',
+        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>',
+        desc: 'Procurement Managers handle the entire purchasing pipeline. They receive approved material indents, create and send Purchase Orders (POs) to vendors, negotiate rates, track delivery status, and manage vendor relationships. They ensure the right materials reach the right site at the right cost.',
+        permissions: ['Create Purchase Orders', 'Manage Vendors', 'Track Deliveries', 'Compare Vendor Rates', 'Process Approved Indents', 'View Inventory Levels'],
+        modules: ['Purchase Orders', 'Vendors', 'Indents (View Approved)', 'Inventory', 'Reports'],
+        highlights: ['Create Purchase Orders', 'Manage Vendors']
+    },
+    'accountant': {
+        title: 'Accountant',
+        subtitle: 'Finance & payments',
+        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>',
+        desc: 'Accountants manage all financial operations within BuildersNova. They process vendor payments against approved POs, track payment milestones, generate financial reports, and maintain a complete audit trail of all transactions. They ensure every rupee spent is accounted for and tied to an approved purchase order.',
+        permissions: ['Process Payments', 'View All POs', 'Generate Financial Reports', 'Track Payment History', 'Manage Payment Milestones', 'Export Ledger Data'],
+        modules: ['Payments', 'Purchase Orders (View)', 'Reports', 'Dashboard (Financial View)'],
+        highlights: ['Process Payments', 'Generate Financial Reports']
+    }
+};
+
+// Modal logic
+const overlay = document.getElementById('roleModalOverlay');
+const closeBtn = document.getElementById('roleModalClose');
+
+function openRoleModal(roleKey) {
+    const data = roleData[roleKey];
+    if (!data) return;
+
+    document.getElementById('roleModalIcon').innerHTML = data.icon;
+    document.getElementById('roleModalTitle').textContent = data.title;
+    document.getElementById('roleModalSubtitle').textContent = data.subtitle;
+    document.getElementById('roleModalDesc').textContent = data.desc;
+
+    // Render permission tags
+    const permsEl = document.getElementById('roleModalPerms');
+    permsEl.innerHTML = data.permissions.map(p =>
+        `<span class="role-perm-tag${data.highlights.includes(p) ? ' highlight' : ''}">${p}</span>`
+    ).join('');
+
+    // Render module tags
+    const modsEl = document.getElementById('roleModalModules');
+    modsEl.innerHTML = data.modules.map(m =>
+        `<span class="role-perm-tag">${m}</span>`
+    ).join('');
+
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeRoleModal() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Attach click events to role cards
+document.querySelectorAll('.role-card[data-role]').forEach(card => {
+    card.addEventListener('click', () => openRoleModal(card.dataset.role));
+});
+
+// Close on overlay click
+overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeRoleModal();
+});
+
+// Close on button click
+closeBtn.addEventListener('click', closeRoleModal);
+
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeRoleModal();
+});
+</script>
+
+</body>
+</html>
