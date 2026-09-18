@@ -610,40 +610,206 @@ section { padding:96px 0; }
    FOOTER
    ================================================================ */
 .site-footer {
-    background:var(--gray-900); color:rgba(255,255,255,.7); padding:72px 0 32px;
+    background:#0A1628; color:rgba(255,255,255,.7); padding:0 0 0;
 }
-.footer-grid {
-    display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px;
-    margin-bottom:48px;
+.footer-sponsored {
+    text-align:center; padding:24px 0 0;
+    font-size:.72rem; letter-spacing:.15em; text-transform:uppercase;
+    color:rgba(255,255,255,.35);
+}
+.footer-main {
+    display:grid; grid-template-columns:2.2fr 1fr 1fr 1fr 1.5fr; gap:40px;
+    padding:40px 0 48px; align-items:start;
 }
 .footer-brand { }
-.footer-logo { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
-.footer-logo img { height:40px; filter:drop-shadow(0 1px 2px rgba(0,0,0,.2)); }
-.footer-logo strong { font-size:1.15rem; color:var(--white); }
-.footer-brand p { font-size:.9rem; line-height:1.6; margin-bottom:20px; }
-.footer-social { display:flex; gap:12px; }
-.footer-social a {
-    width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.08);
-    display:flex; align-items:center; justify-content:center;
-    transition:background .2s;
-}
-.footer-social a:hover { background:rgba(255,255,255,.15); }
-.footer-social svg { width:18px; height:18px; color:rgba(255,255,255,.7); }
+.footer-logo { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+.footer-logo img { height:44px; filter:drop-shadow(0 1px 2px rgba(0,0,0,.2)); }
+.footer-logo strong { font-size:1.2rem; color:var(--white); font-weight:700; }
+.footer-tagline { font-size:.85rem; color:var(--amber); font-style:italic; margin-bottom:16px; }
+.footer-brand p { font-size:.82rem; line-height:1.7; color:rgba(255,255,255,.55); max-width:320px; }
 
-.footer-col h4 { color:var(--white); font-size:.88rem; margin-bottom:20px; text-transform:uppercase; letter-spacing:.05em; }
+.footer-col h4 {
+    color:var(--white); font-size:.85rem; font-weight:700; margin-bottom:20px;
+    letter-spacing:.02em;
+}
 .footer-col a {
-    display:block; font-size:.88rem; color:rgba(255,255,255,.6);
-    padding:4px 0; transition:color .2s;
+    display:block; font-size:.84rem; color:rgba(255,255,255,.55);
+    padding:5px 0; transition:color .2s; text-decoration:none;
 }
 .footer-col a:hover { color:var(--white); }
 
-.footer-bottom {
-    padding-top:32px; border-top:1px solid rgba(255,255,255,.1);
-    display:flex; justify-content:space-between; align-items:center;
-    font-size:.82rem;
+/* Social & Contact (right column) */
+.footer-contact { }
+.footer-social {
+    display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px;
 }
-.footer-bottom a { color:rgba(255,255,255,.5); margin-left:24px; transition:color .2s; }
-.footer-bottom a:hover { color:var(--white); }
+.footer-social a {
+    width:38px; height:38px; border-radius:50%; background:var(--amber);
+    display:flex; align-items:center; justify-content:center;
+    transition:background .2s, transform .2s; text-decoration:none;
+}
+.footer-social a:hover { background:var(--amber-dark); transform:scale(1.08); }
+.footer-social a svg { width:18px; height:18px; color:#0A1628; fill:#0A1628; }
+.footer-social a .social-icon-stroke { fill:none; stroke:#0A1628; stroke-width:2; }
+
+.footer-contact-item {
+    display:flex; align-items:center; gap:10px;
+    font-size:.84rem; color:rgba(255,255,255,.65); margin-bottom:10px;
+}
+.footer-contact-item svg {
+    width:16px; height:16px; flex-shrink:0;
+    color:var(--amber); fill:none; stroke:var(--amber); stroke-width:2;
+}
+.footer-contact-item a {
+    color:rgba(255,255,255,.65); text-decoration:none; transition:color .2s;
+}
+.footer-contact-item a:hover { color:var(--white); }
+
+/* Footer bottom bar */
+.footer-bottom {
+    padding:20px 0; border-top:1px solid rgba(255,255,255,.08);
+    text-align:center; font-size:.8rem; color:rgba(255,255,255,.35);
+}
+
+/* ================================================================
+   DEMO REQUEST MODAL
+   ================================================================ */
+.demo-modal-overlay {
+    position:fixed; inset:0; z-index:10000;
+    background:rgba(0,0,0,.6); backdrop-filter:blur(4px);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; visibility:hidden; transition:opacity .3s, visibility .3s;
+}
+.demo-modal-overlay.active { opacity:1; visibility:visible; }
+
+.demo-modal {
+    background:var(--white); border-radius:var(--radius-lg);
+    width:90%; max-width:520px; max-height:90vh; overflow-y:auto;
+    box-shadow:0 25px 50px rgba(0,0,0,.25);
+    transform:translateY(24px) scale(.97);
+    transition:transform .3s ease;
+}
+.demo-modal-overlay.active .demo-modal {
+    transform:translateY(0) scale(1);
+}
+
+.demo-modal-header {
+    padding:28px 32px 20px;
+    border-bottom:1px solid var(--gray-200);
+    display:flex; justify-content:space-between; align-items:flex-start;
+}
+.demo-modal-header h3 {
+    font-size:1.3rem; font-weight:700; color:var(--navy);
+    margin:0 0 4px;
+}
+.demo-modal-header p {
+    font-size:.88rem; color:var(--gray-500); margin:0;
+}
+.demo-modal-close {
+    background:none; border:none; cursor:pointer;
+    width:36px; height:36px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.5rem; color:var(--gray-400);
+    transition:background .2s, color .2s; flex-shrink:0;
+}
+.demo-modal-close:hover { background:var(--gray-100); color:var(--gray-700); }
+
+.demo-modal-body { padding:24px 32px 32px; }
+
+/* Step indicator */
+.demo-steps {
+    display:flex; gap:8px; margin-bottom:28px;
+}
+.demo-step-dot {
+    height:4px; flex:1; border-radius:4px;
+    background:var(--gray-200); transition:background .3s;
+}
+.demo-step-dot.active { background:var(--amber); }
+.demo-step-dot.completed { background:var(--success); }
+
+/* Form styles */
+.demo-form-step { display:none; }
+.demo-form-step.active { display:block; }
+
+.demo-field {
+    margin-bottom:18px;
+}
+.demo-field label {
+    display:block; font-size:.82rem; font-weight:600;
+    color:var(--gray-700); margin-bottom:6px;
+}
+.demo-field label .required { color:var(--error); }
+.demo-field input,
+.demo-field select,
+.demo-field textarea {
+    width:100%; padding:11px 14px; border:1.5px solid var(--gray-200);
+    border-radius:var(--radius-sm); font-size:.9rem;
+    font-family:inherit; color:var(--gray-800);
+    transition:border-color .2s, box-shadow .2s;
+    background:var(--white);
+}
+.demo-field input:focus,
+.demo-field select:focus,
+.demo-field textarea:focus {
+    outline:none; border-color:var(--amber);
+    box-shadow:0 0 0 3px rgba(245,158,11,.12);
+}
+.demo-field textarea { resize:vertical; min-height:80px; }
+.demo-field .field-error {
+    font-size:.76rem; color:var(--error); margin-top:4px; display:none;
+}
+.demo-field.error input,
+.demo-field.error select,
+.demo-field.error textarea {
+    border-color:var(--error);
+}
+.demo-field.error .field-error { display:block; }
+
+.demo-field-row {
+    display:grid; grid-template-columns:1fr 1fr; gap:14px;
+}
+
+.demo-btn-row {
+    display:flex; gap:12px; margin-top:8px;
+}
+.demo-btn-back {
+    padding:12px 24px; border-radius:var(--radius-sm);
+    border:1.5px solid var(--gray-200); background:var(--white);
+    font-size:.9rem; font-weight:600; cursor:pointer;
+    color:var(--gray-600); transition:all .2s;
+}
+.demo-btn-back:hover { border-color:var(--gray-400); color:var(--gray-800); }
+.demo-btn-next,
+.demo-btn-submit {
+    flex:1; padding:12px 24px; border-radius:var(--radius-sm);
+    border:none; font-size:.9rem; font-weight:600; cursor:pointer;
+    color:var(--white); transition:all .2s;
+}
+.demo-btn-next { background:var(--navy); }
+.demo-btn-next:hover { background:var(--navy-light); }
+.demo-btn-submit { background:var(--amber); color:var(--navy); }
+.demo-btn-submit:hover { background:var(--amber-dark); }
+
+/* Success state */
+.demo-success {
+    text-align:center; padding:20px 0;
+}
+.demo-success-icon {
+    width:72px; height:72px; border-radius:50%;
+    background:var(--success-bg); color:var(--success);
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 20px;
+}
+.demo-success-icon svg { width:36px; height:36px; }
+.demo-success h3 {
+    font-size:1.25rem; font-weight:700; color:var(--navy); margin:0 0 8px;
+}
+.demo-success p {
+    font-size:.9rem; color:var(--gray-500); margin:0 0 24px; line-height:1.6;
+}
+.demo-success .demo-btn-next {
+    display:inline-block; padding:12px 32px;
+}
 
 /* ================================================================
    SCROLL REVEAL ANIMATION
@@ -671,7 +837,7 @@ section { padding:96px 0; }
     .testimonials-grid { grid-template-columns:1fr; }
     .app-inner { grid-template-columns:1fr; text-align:center; }
     .app-badges { justify-content:center; }
-    .footer-grid { grid-template-columns:1fr 1fr; }
+    .footer-main { grid-template-columns:1fr 1fr; gap:32px; }
 }
 
 @media (max-width:768px) {
@@ -729,8 +895,11 @@ section { padding:96px 0; }
     .phone-mockup { width:200px; }
 
     /* Footer */
-    .footer-grid { grid-template-columns:1fr; gap:32px; }
-    .footer-bottom { flex-direction:column; gap:12px; text-align:center; }
+    .footer-main { grid-template-columns:1fr; gap:32px; }
+    .footer-bottom { text-align:center; }
+    .demo-field-row { grid-template-columns:1fr; }
+    .demo-modal-header { padding:20px 24px 16px; }
+    .demo-modal-body { padding:20px 24px 24px; }
 
     /* Role modal */
     .role-modal-header { padding:20px 20px 16px; gap:12px; }
@@ -1604,60 +1773,84 @@ section { padding:96px 0; }
      ============================================================ -->
 <footer class="site-footer">
     <div class="container">
-        <div class="footer-grid">
+        <div class="footer-sponsored">SPONSORED</div>
+        <div class="footer-main">
+            <!-- Brand Column -->
             <div class="footer-brand">
                 <div class="footer-logo">
                     <img src="logo.png" alt="Builders Nova">
                     <strong>Builders Nova</strong>
                 </div>
-                <p>The all-in-one construction site management platform. Manage projects, sites, materials, teams, and finances — all from one place.</p>
-                <div class="footer-social">
-                    <a href="#" aria-label="LinkedIn">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                    </a>
-                    <a href="#" aria-label="Twitter">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
-                    </a>
-                    <a href="#" aria-label="YouTube">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="white"/></svg>
-                    </a>
-                </div>
+                <div class="footer-tagline">Building Better Tomorrow.</div>
+                <p>Builders Nova simplifies construction site management with smart tools for projects, materials, teams, communication, and finance in one platform.</p>
             </div>
 
-            <div class="footer-col">
-                <h4>Product</h4>
-                <a href="#features">Features</a>
-                <a href="#showcase">Product Tour</a>
-                <a href="#pricing">Pricing</a>
-                <a href="https://www.buildersnova.com">Mobile App</a>
-                <a href="https://www.buildersnova.com">API Docs</a>
-            </div>
-
-            <div class="footer-col">
-                <h4>Solutions</h4>
-                <a href="https://www.buildersnova.com">For Developers</a>
-                <a href="https://www.buildersnova.com">For Contractors</a>
-                <a href="https://www.buildersnova.com">For Project Managers</a>
-                <a href="https://www.buildersnova.com">For Site Engineers</a>
-            </div>
-
+            <!-- Company Column -->
             <div class="footer-col">
                 <h4>Company</h4>
-                <a href="https://www.buildersnova.com">About Us</a>
-                <a href="https://www.buildersnova.com">Blog</a>
-                <a href="https://www.buildersnova.com">Careers</a>
-                <a href="https://www.buildersnova.com">Contact</a>
-                <a href="https://www.buildersnova.com">Privacy Policy</a>
+                <a href="#">About us</a>
+                <a href="#features">All Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#">AI Assist</a>
+                <a href="#">Contact us</a>
+            </div>
+
+            <!-- Links Column -->
+            <div class="footer-col">
+                <h4>Links</h4>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#" onclick="openDemoModal(); return false;">Demo</a>
+                <a href="#">Log in</a>
+            </div>
+
+            <!-- Resources Column -->
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <a href="#">Help docs</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Delete Account</a>
+                <a href="#">Blog</a>
+            </div>
+
+            <!-- Social & Contact Column -->
+            <div class="footer-contact">
+                <div class="footer-social">
+                    <!-- WhatsApp -->
+                    <a href="#" aria-label="WhatsApp">
+                        <svg viewBox="0 0 24 24" fill="#0A1628"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    </a>
+                    <!-- YouTube -->
+                    <a href="#" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" fill="#0A1628"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                    <!-- Telegram -->
+                    <a href="#" aria-label="Telegram">
+                        <svg viewBox="0 0 24 24" fill="#0A1628"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                    </a>
+                    <!-- X / Twitter -->
+                    <a href="#" aria-label="X">
+                        <svg viewBox="0 0 24 24" fill="#0A1628"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <!-- Discord -->
+                    <a href="#" aria-label="Discord">
+                        <svg viewBox="0 0 24 24" fill="#0A1628"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
+                    </a>
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <a href="mailto:info@buildersnova.com">info@buildersnova.com</a>
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <span>Toll Free: <strong>91001 25907</strong></span>
+                </div>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <span>&copy; 2024 Builders Nova. All rights reserved.</span>
-            <div>
-                <a href="https://www.buildersnova.com">Terms of Service</a>
-                <a href="https://www.buildersnova.com">Privacy Policy</a>
-                <a href="https://www.buildersnova.com">Cookie Policy</a>
-            </div>
+            &copy; 2026 Builders Nova. All rights reserved.
         </div>
     </div>
 </footer>
@@ -1887,6 +2080,317 @@ closeBtn.addEventListener('click', closeRoleModal);
 // Close on Escape key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeRoleModal();
+});
+</script>
+
+<!-- ============================================================
+     DEMO REQUEST MODAL
+     ============================================================ -->
+<div class="demo-modal-overlay" id="demoModalOverlay">
+    <div class="demo-modal">
+        <div class="demo-modal-header">
+            <div>
+                <h3 id="demoModalTitle">Request a Demo</h3>
+                <p id="demoModalSubtitle">See how Builders Nova can transform your construction management</p>
+            </div>
+            <button class="demo-modal-close" id="demoModalClose">&times;</button>
+        </div>
+        <div class="demo-modal-body">
+            <!-- Step progress dots -->
+            <div class="demo-steps">
+                <div class="demo-step-dot active" data-step="1"></div>
+                <div class="demo-step-dot" data-step="2"></div>
+                <div class="demo-step-dot" data-step="3"></div>
+            </div>
+
+            <form id="demoForm" novalidate>
+                <!-- Step 1: Personal Information -->
+                <div class="demo-form-step active" data-step="1">
+                    <div class="demo-field-row">
+                        <div class="demo-field">
+                            <label>First Name <span class="required">*</span></label>
+                            <input type="text" name="firstName" placeholder="John" required>
+                            <div class="field-error">Please enter your first name</div>
+                        </div>
+                        <div class="demo-field">
+                            <label>Last Name <span class="required">*</span></label>
+                            <input type="text" name="lastName" placeholder="Doe" required>
+                            <div class="field-error">Please enter your last name</div>
+                        </div>
+                    </div>
+                    <div class="demo-field">
+                        <label>Work Email <span class="required">*</span></label>
+                        <input type="email" name="email" placeholder="john@company.com" required>
+                        <div class="field-error">Please enter a valid email address</div>
+                    </div>
+                    <div class="demo-field">
+                        <label>Phone Number <span class="required">*</span></label>
+                        <input type="tel" name="phone" placeholder="+91 98765 43210" required>
+                        <div class="field-error">Please enter a valid phone number</div>
+                    </div>
+                    <div class="demo-btn-row">
+                        <button type="button" class="demo-btn-next" onclick="demoNextStep(1)">Continue →</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Company Details -->
+                <div class="demo-form-step" data-step="2">
+                    <div class="demo-field">
+                        <label>Company Name <span class="required">*</span></label>
+                        <input type="text" name="company" placeholder="Your Construction Co." required>
+                        <div class="field-error">Please enter your company name</div>
+                    </div>
+                    <div class="demo-field-row">
+                        <div class="demo-field">
+                            <label>Job Title <span class="required">*</span></label>
+                            <input type="text" name="jobTitle" placeholder="Project Manager" required>
+                            <div class="field-error">Please enter your job title</div>
+                        </div>
+                        <div class="demo-field">
+                            <label>Company Size <span class="required">*</span></label>
+                            <select name="companySize" required>
+                                <option value="">Select team size</option>
+                                <option value="1-10">1–10 employees</option>
+                                <option value="11-50">11–50 employees</option>
+                                <option value="51-200">51–200 employees</option>
+                                <option value="201-500">201–500 employees</option>
+                                <option value="500+">500+ employees</option>
+                            </select>
+                            <div class="field-error">Please select your company size</div>
+                        </div>
+                    </div>
+                    <div class="demo-field">
+                        <label>City / Location</label>
+                        <input type="text" name="city" placeholder="Mumbai, Delhi, Bangalore...">
+                    </div>
+                    <div class="demo-btn-row">
+                        <button type="button" class="demo-btn-back" onclick="demoPrevStep(2)">← Back</button>
+                        <button type="button" class="demo-btn-next" onclick="demoNextStep(2)">Continue →</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Requirements -->
+                <div class="demo-form-step" data-step="3">
+                    <div class="demo-field">
+                        <label>What are you most interested in? <span class="required">*</span></label>
+                        <select name="interest" required>
+                            <option value="">Select your primary interest</option>
+                            <option value="dsr">Daily Site Reports (DSR)</option>
+                            <option value="procurement">Procurement & Purchase Orders</option>
+                            <option value="inventory">Inventory Management</option>
+                            <option value="payments">Payments & Finance</option>
+                            <option value="workforce">Workforce Management</option>
+                            <option value="all">Full Platform Demo</option>
+                        </select>
+                        <div class="field-error">Please select your primary interest</div>
+                    </div>
+                    <div class="demo-field">
+                        <label>Number of Active Projects</label>
+                        <select name="projects">
+                            <option value="">Select range</option>
+                            <option value="1-5">1–5 projects</option>
+                            <option value="6-15">6–15 projects</option>
+                            <option value="16-50">16–50 projects</option>
+                            <option value="50+">50+ projects</option>
+                        </select>
+                    </div>
+                    <div class="demo-field">
+                        <label>Anything else you'd like us to know?</label>
+                        <textarea name="message" placeholder="Tell us about your current challenges, specific features you need, or preferred demo time..."></textarea>
+                    </div>
+                    <div class="demo-btn-row">
+                        <button type="button" class="demo-btn-back" onclick="demoPrevStep(3)">← Back</button>
+                        <button type="submit" class="demo-btn-submit">🚀 Submit Request</button>
+                    </div>
+                </div>
+
+                <!-- Success State -->
+                <div class="demo-form-step" data-step="success">
+                    <div class="demo-success">
+                        <div class="demo-success-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <h3>Demo Request Submitted!</h3>
+                        <p>Thank you for your interest in Builders Nova. Our team will reach out within 24 hours to schedule your personalized demo.</p>
+                        <button type="button" class="demo-btn-next" onclick="closeDemoModal()">Close</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// DEMO MODAL - Complete Lead Capture Flow
+// ============================================================
+const demoOverlay = document.getElementById('demoModalOverlay');
+const demoForm = document.getElementById('demoForm');
+let currentDemoStep = 1;
+
+function openDemoModal() {
+    // Reset to step 1
+    currentDemoStep = 1;
+    updateDemoSteps();
+    demoForm.reset();
+    // Clear all error states
+    demoForm.querySelectorAll('.demo-field').forEach(f => f.classList.remove('error'));
+    // Update header
+    document.getElementById('demoModalTitle').textContent = 'Request a Demo';
+    document.getElementById('demoModalSubtitle').textContent = 'See how Builders Nova can transform your construction management';
+    // Show modal
+    demoOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    // Focus first input
+    setTimeout(() => {
+        const firstInput = demoForm.querySelector('.demo-form-step.active input');
+        if (firstInput) firstInput.focus();
+    }, 350);
+}
+
+function closeDemoModal() {
+    demoOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function updateDemoSteps() {
+    // Update step dots
+    demoOverlay.querySelectorAll('.demo-step-dot').forEach(dot => {
+        const step = parseInt(dot.dataset.step);
+        dot.classList.remove('active', 'completed');
+        if (step === currentDemoStep) dot.classList.add('active');
+        else if (step < currentDemoStep) dot.classList.add('completed');
+    });
+    // Show/hide form steps
+    demoForm.querySelectorAll('.demo-form-step').forEach(panel => {
+        panel.classList.remove('active');
+    });
+    const target = currentDemoStep === 4 ? 'success' : currentDemoStep;
+    const activePanel = demoForm.querySelector(`.demo-form-step[data-step="${target}"]`);
+    if (activePanel) activePanel.classList.add('active');
+
+    // Update header text based on step
+    const titles = {
+        1: ['Request a Demo', 'See how Builders Nova can transform your construction management'],
+        2: ['Company Details', 'Help us understand your organization better'],
+        3: ['Your Requirements', 'Tell us what you need so we can tailor your demo'],
+        4: ['All Done! 🎉', '']
+    };
+    const [title, subtitle] = titles[currentDemoStep] || titles[1];
+    document.getElementById('demoModalTitle').textContent = title;
+    document.getElementById('demoModalSubtitle').textContent = subtitle;
+
+    // Hide step dots on success
+    const stepsBar = demoOverlay.querySelector('.demo-steps');
+    stepsBar.style.display = currentDemoStep === 4 ? 'none' : 'flex';
+}
+
+function validateStep(step) {
+    const panel = demoForm.querySelector(`.demo-form-step[data-step="${step}"]`);
+    const requiredFields = panel.querySelectorAll('[required]');
+    let valid = true;
+
+    requiredFields.forEach(field => {
+        const wrapper = field.closest('.demo-field');
+        const value = field.value.trim();
+        let fieldValid = value !== '';
+
+        // Email validation
+        if (field.type === 'email' && fieldValid) {
+            fieldValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        }
+        // Phone validation
+        if (field.type === 'tel' && fieldValid) {
+            fieldValid = /^[\d\s\+\-\(\)]{7,15}$/.test(value);
+        }
+
+        if (!fieldValid) {
+            wrapper.classList.add('error');
+            valid = false;
+        } else {
+            wrapper.classList.remove('error');
+        }
+    });
+
+    return valid;
+}
+
+function demoNextStep(fromStep) {
+    if (!validateStep(fromStep)) return;
+    currentDemoStep = fromStep + 1;
+    updateDemoSteps();
+    // Focus first input of next step
+    setTimeout(() => {
+        const nextInput = demoForm.querySelector('.demo-form-step.active input, .demo-form-step.active select');
+        if (nextInput) nextInput.focus();
+    }, 100);
+}
+
+function demoPrevStep(fromStep) {
+    currentDemoStep = fromStep - 1;
+    updateDemoSteps();
+}
+
+// Form submission
+demoForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!validateStep(3)) return;
+
+    // Collect all form data
+    const formData = new FormData(demoForm);
+    const leadData = {
+        firstName: formData.get('firstName'),
+        lastName: formData.get('lastName'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        company: formData.get('company'),
+        jobTitle: formData.get('jobTitle'),
+        companySize: formData.get('companySize'),
+        city: formData.get('city'),
+        interest: formData.get('interest'),
+        projects: formData.get('projects'),
+        message: formData.get('message'),
+        submittedAt: new Date().toISOString(),
+        source: 'website-demo-request'
+    };
+
+    // Store lead in localStorage
+    const existingLeads = JSON.parse(localStorage.getItem('buildersnova_demo_leads') || '[]');
+    existingLeads.push(leadData);
+    localStorage.setItem('buildersnova_demo_leads', JSON.stringify(existingLeads));
+
+    // Log to console for debugging
+    console.log('📋 New Demo Lead Captured:', leadData);
+    console.log('📊 Total Leads:', existingLeads.length);
+
+    // Show success
+    currentDemoStep = 4;
+    updateDemoSteps();
+});
+
+// Close demo modal handlers
+document.getElementById('demoModalClose').addEventListener('click', closeDemoModal);
+demoOverlay.addEventListener('click', (e) => {
+    if (e.target === demoOverlay) closeDemoModal();
+});
+
+// Update Escape key handler to also close demo modal
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeRoleModal();
+        closeDemoModal();
+    }
+});
+
+// Wire up all "Request Demo" / "Schedule a Demo" buttons to open the modal
+document.querySelectorAll('a').forEach(link => {
+    const text = link.textContent.trim().toLowerCase();
+    if (text === 'request demo' || text === 'schedule a demo') {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            openDemoModal();
+        });
+    }
 });
 </script>
 
