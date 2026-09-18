@@ -1,165 +1,186 @@
-# Builders Nova — Landing Page
+# Builders Nova — Landing Page & Platform
 
-> Professional construction site management SaaS landing page for [buildersnova.com](https://www.buildersnova.com)
+> Professional construction site management SaaS platform for [buildersnova.com](https://www.buildersnova.com), operated by **ATTNS INNOVATION LABS PVT LTD**.
+
+---
 
 ## 📋 Overview
 
-A high-converting, professional landing page for Builders Nova — an all-in-one construction site management platform. Built as a single `index.html` with all CSS and JavaScript embedded inline for easy deployment.
+**Builders Nova** is an all-in-one construction and project management SaaS platform designed for builders, contractors, developers, site engineers, and project teams. This repository hosts the high-converting landing page, interactive subscription/pricing system, demo lead capture pipeline, privacy policy, and local Express API server.
 
-## 🗂️ File Structure
+---
 
-```
-sample landing page/
-├── index.html               # Main landing page (self-contained)
-├── logo.png                 # Brand logo
-├── screenshot-dashboard.png # Dashboard screenshot
-├── screenshot-dsr.png       # Daily Site Report screenshot
-├── screenshot-wsr.png       # Weekly Site Report screenshot
-├── screenshot-indent.png    # Material Indent screenshot
-├── screenshot-inventory.png # Inventory screenshot
-├── screenshot-payments.png  # Payments screenshot
-└── README.md                # This file
-```
+## ⚡ Quick Start (Local Development)
 
-## 🎨 Design System
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v16+ recommended)
+- [npm](https://www.npmjs.com/)
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| **Primary (Navy)** | `#1B2A4A` | Headers, nav, CTA backgrounds |
-| **Secondary (Amber)** | `#F59E0B` | Highlights, badges, accent elements |
-| **Background** | `#FFFFFF` / `#F9FAFB` | Page and section backgrounds |
-| **Cards** | `#FFFFFF` | Card surfaces with subtle borders |
-| **Text** | `#1E293B` | Body text (charcoal, not pure black) |
-| **Success** | `#059669` | Checkmarks, positive states |
-| **Warning** | `#D97706` | Alerts, pending states |
-
-- **Typography**: Inter (Google Fonts)
-- **Spacing System**: 8px grid
-- **Border Radius**: 6px (sm), 10px (md), 16px (lg), 24px (xl)
-
-## 🚀 Deployment
-
-### Option 1: Static File Hosting (Recommended)
-
-The entire page is self-contained in `index.html` with inline CSS/JS. Simply deploy the folder contents to any static hosting:
-
+### 1. Installation
 ```bash
-# Deploy to Netlify
-netlify deploy --dir=. --prod
+# Clone the repository
+git clone https://github.com/HariGanesh-UI/Sample-landing_page.git
+cd Sample-landing_page
 
-# Deploy to Vercel
-vercel --prod
-
-# Deploy to Firebase Hosting
-firebase deploy
-
-# Deploy to AWS S3
-aws s3 sync . s3://your-bucket-name --acl public-read
+# Install dependencies (Express, CORS)
+npm install
 ```
 
-### Option 2: Subdomain on buildersnova.com
+### 2. Start Application
+```bash
+# Start production server
+npm start
 
-To attach as a landing page subdomain (e.g., `landing.buildersnova.com`):
+# Or start with auto-reload (development)
+npm run dev
+```
 
-#### Using Nginx (Reverse Proxy / Static)
+The application will start at:
+👉 **[http://localhost:3000](http://localhost:3000)**
 
-```nginx
-server {
-    listen 80;
-    server_name landing.buildersnova.com;
+---
 
-    root /var/www/landing;
-    index index.html;
+## 🗂️ Project Structure
 
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
+```
+Sample-landing_page/
+├── index.html               # Main landing page (CSS, HTML & JS)
+├── privacy-policy.html      # Comprehensive 14-section Privacy Policy
+├── server.js                # Express backend server & REST API
+├── demo-leads.json          # Demo request leads database (JSON store)
+├── package.json             # NPM package scripts & dependencies
+├── logo.png                 # Builders Nova brand logo
+├── app-screenshot.png       # Mobile app preview mockup
+├── screenshot-dashboard.png # Product screenshot: Executive Dashboard
+├── screenshot-dsr.png       # Product screenshot: Daily Site Report (DSR)
+├── screenshot-wsr.png       # Product screenshot: Weekly Site Report (WSR)
+├── screenshot-indent.png    # Product screenshot: Material Indent
+├── screenshot-inventory.png # Product screenshot: Inventory & Stock
+├── screenshot-payments.png  # Product screenshot: Payment Tracking
+├── .gitignore               # Git ignored directories (node_modules, logs)
+└── README.md                # Project documentation
+```
 
-    # Cache static assets
-    location ~* \.(png|jpg|jpeg|gif|ico|svg)$ {
-        expires 30d;
-        add_header Cache-Control "public, immutable";
-    }
+---
+
+## 🚀 Backend Server & API Routes
+
+The built-in Node/Express server (`server.js`) serves static assets and provides RESTful endpoints for lead collection and payment tracking:
+
+### API Endpoints:
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/` | Serves `index.html` landing page |
+| `GET` | `/privacy-policy` | Serves `privacy-policy.html` |
+| `POST` | `/api/demo-request` | Submits and records a new demo lead |
+| `GET` | `/api/demo-leads` | Returns all captured leads as JSON |
+| `GET` | `/api/demo-leads/:id` | Fetches a specific lead by ID |
+| `DELETE` | `/api/demo-leads/:id` | Deletes a specific lead |
+
+#### Example: Demo Request Payload (`POST /api/demo-request`)
+```json
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@acmebuilders.com",
+  "phone": "+91 98765 43210",
+  "company": "Acme Builders Ltd",
+  "jobTitle": "Project Manager",
+  "companySize": "51-200",
+  "city": "Hyderabad",
+  "interest": "Full Platform Demo",
+  "projects": "5",
+  "message": "Interested in site inventory and DSR automation."
 }
 ```
 
-#### Using Apache
+*Note: If the server is offline during development, leads are automatically preserved in the browser's `localStorage` (`buildersnova_demo_leads`) as a fallback.*
 
-```apache
-<VirtualHost *:80>
-    ServerName landing.buildersnova.com
-    DocumentRoot /var/www/landing
+---
 
-    <Directory /var/www/landing>
-        Options -Indexes
-        AllowOverride All
-    </Directory>
-</VirtualHost>
-```
+## 💳 Pricing & Subscription Module
 
-#### DNS Configuration
+Modern SaaS 4-column pricing cards combining data integrity with responsive layout:
 
-Add a CNAME or A record for the subdomain:
+| Tier | Price | User Limit | Project Limit | Modules | Action Button |
+|---|---|---|---|---|---|
+| **STARTER** | **₹999** / month | 10 users | 3 projects | All modules & roles | `Switch to Starter` |
+| **PROFESSIONAL** | **₹2,999** / month | 25 users | 10 projects | All modules & roles | `Switch to Professional` |
+| **BUSINESS** | **₹5,999** / month | 75 users | Unlimited | All modules & roles | `Switch to Business` |
+| **ENTERPRISE** | **₹15,000+** / month | Unlimited | Unlimited | All modules & roles | `Contact Sales` |
 
-```
-Type: CNAME
-Name: landing
-Value: buildersnova.com (or your hosting provider's domain)
-TTL: 3600
-```
+### Renewal & Checkout Card:
+Directly below the plans is the renewal and payment section:
+- **`[ MARK AS PAID (MANUAL) ]`**: Direct bank transfer & UPI confirmation dialog with company bank details (`ATTNS INNOVATION LABS PVT LTD`, Account No: `50200088921821`, IFSC: `HDFC0001234`, UPI: `payments@attcity.in`) and UTR reference number submission.
+- **`[ PAY WITH STRIPE ]`**: 256-bit encrypted simulated card checkout modal with immediate transaction confirmation and receipt ID.
 
-### Option 3: Cloudflare Pages
+---
 
-1. Push this folder to a GitHub/GitLab repository
-2. Connect the repo to Cloudflare Pages
-3. Set build output to `/` (root)
-4. Add custom domain: `landing.buildersnova.com`
+## 📝 Demo Request Modal Flow
+
+The 3-step interactive lead capture modal triggers across all CTA buttons:
+- **Step 1: Contact Details** — First Name, Last Name, Work Email, Phone (with live format validation).
+- **Step 2: Company Information** — Company Name, Designation / Job Title, Company Size, City.
+- **Step 3: Requirements** — Primary Feature Interest (DSR, Procurement, Inventory, Payments, Workforce, Full Demo), Active Projects, Message.
+- **Success State** — Animated checkmark with response commitment and auto-reset.
+
+---
+
+## 📜 Privacy Policy (`privacy-policy.html`)
+
+A 14-section Privacy Policy compliant with Indian IT laws (SPDI Rules 2011) and modern data protection principles:
+- **Company**: ATTNS INNOVATION LABS PVT LTD
+- **Contact & Grievance**: `support@attcity.in`, `grievance@attcity.in`
+- **Sections**: Roman-numeral table of contents, sticky navigation, data retention schedules, security standards, and user rights.
+
+---
+
+## 🎨 Design System & Color Palette
+
+| Token | Value | Usage |
+|---|---|---|
+| **Navy (Primary)** | `#1B2A4A` | Brand headers, primary buttons, navigation |
+| **Dark Navy** | `#0A1628` | AlignGate-style 5-column footer |
+| **Amber (Accent)** | `#F59E0B` / `#EA8C00` | Badges, highlights, CTA accents |
+| **Surface Background** | `#FFFFFF` / `#F9FAFB` | Page, section, and card surfaces |
+| **Border Soft** | `#E5E7EB` | Subtle card outlines |
+| **Text Main** | `#111827` / `#1E293B` | High-contrast body text |
+| **Success Emerald** | `#059669` | Feature checkmarks, verification states |
+
+---
 
 ## 📱 Responsive Breakpoints
 
-| Breakpoint | Layout |
-|------------|--------|
-| `> 1024px` | Full desktop layout |
-| `768px – 1024px` | Tablet (2-column grids) |
-| `480px – 768px` | Mobile (single column) |
-| `< 480px` | Small mobile |
+| Breakpoint | Devices | Layout Adjustments |
+|---|---|---|
+| **> 1024px** | Desktop / Large displays | 4-column pricing grid, 5-column footer, full navigation |
+| **768px – 1024px** | Tablets / Small laptops | 2-column pricing grid (`2x2`), mobile menu toggle |
+| **≤ 768px** | Mobile phones | 1-column stacked cards, full-width touch buttons |
 
-## 🔧 Customization
+---
 
-### Changing Colors
-All colors are defined as CSS custom properties in `:root`. Update the variables at the top of the `<style>` block.
+## 🚢 Production Deployment
 
-### Updating Screenshots
-Replace the `.png` files in the root directory. Filenames must match:
-- `screenshot-dashboard.png`
-- `screenshot-dsr.png`
-- `screenshot-wsr.png`
-- `screenshot-indent.png`
-- `screenshot-inventory.png`
-- `screenshot-payments.png`
+### Option 1: Node.js Hosting (Render, Railway, DigitalOcean, Heroku)
+```bash
+# Set PORT environment variable if required
+export PORT=3000
+npm start
+```
 
-### Updating Logo
-Replace `logo.png` with your updated logo file.
+### Option 2: Serverless / Static Hosting (Vercel, Netlify)
+If deploying only static pages:
+```bash
+# Vercel
+vercel --prod
 
-## ✅ Features
+# Netlify
+netlify deploy --dir=. --prod
+```
 
-- [x] Sticky header with scroll effect
-- [x] Hero section with product screenshot mockup
-- [x] Animated stat counters
-- [x] 6-feature card grid with tags
-- [x] 4-step "How It Works" section
-- [x] Interactive product showcase with 6 screenshot tabs
-- [x] 7-role Maker-Checker architecture display
-- [x] Inventory-first procurement workflow diagram
-- [x] 3-tier pricing cards
-- [x] Customer testimonials
-- [x] Mobile app download section
-- [x] Full-width CTA section
-- [x] Professional footer with social links
-- [x] Scroll-reveal animations
-- [x] Fully responsive (mobile-first)
-- [x] All CTAs link to `www.buildersnova.com`
+---
 
-## 📄 License
+## 📄 License & Legal
 
-© 2024 Builders Nova. All rights reserved.
+© 2026 **Builders Nova**. Operated by **ATTNS INNOVATION LABS PVT LTD**. All rights reserved.
