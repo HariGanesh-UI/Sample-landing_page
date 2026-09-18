@@ -1,0 +1,26 @@
+{
+  "name": "sample-landing-page",
+  "version": "1.0.0",
+  "description": "> Professional construction site management SaaS landing page for [buildersnova.com](https://www.buildersnova.com)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HariGanesh-UI/Sample-landing_page.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/HariGanesh-UI/Sample-landing_page/issues"
+  },
+  "homepage": "https://github.com/HariGanesh-UI/Sample-landing_page#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
+}

@@ -495,34 +495,113 @@ section { padding:96px 0; }
 /* ================================================================
    PRICING
    ================================================================ */
-.pricing { background:var(--gray-50); }
+.pricing { background:var(--gray-50); padding:80px 0; }
 .pricing-grid {
-    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
-    max-width:960px; margin:0 auto;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+    max-width:1160px; margin:0 auto;
 }
 .pricing-card {
-    background:var(--white); border-radius:var(--radius-lg); padding:36px;
-    border:1px solid var(--gray-200); position:relative; transition:all .3s;
+    background:var(--white); border-radius:16px; padding:32px 24px 28px;
+    border:1px solid #E5E7EB; position:relative; transition:transform .25s ease, box-shadow .25s ease;
+    display:flex; flex-direction:column; justify-content:space-between;
 }
-.pricing-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
-.pricing-card.featured {
-    border-color:var(--amber); box-shadow:0 0 0 1px var(--amber), var(--shadow-lg);
+.pricing-card:hover { transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,.06); }
+.pricing-card.selected {
+    border:2px solid #EA8C00;
+    box-shadow:0 8px 24px rgba(234,140,0,.12);
 }
-.pricing-card.featured::before {
-    content:'Most Popular'; position:absolute; top:-12px; left:50%; transform:translateX(-50%);
-    padding:4px 16px; background:var(--amber); color:var(--gray-900);
-    border-radius:100px; font-size:.75rem; font-weight:700;
+.pricing-card-top { margin-bottom:24px; }
+.pricing-label {
+    font-size:.8rem; font-weight:700; color:#6B7280;
+    text-transform:uppercase; letter-spacing:.06em; margin-bottom:12px;
 }
-.pricing-label { font-size:.88rem; font-weight:700; color:var(--gray-500); text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px; }
-.pricing-price { font-size:2.5rem; font-weight:900; color:var(--gray-900); margin-bottom:4px; }
-.pricing-price span { font-size:.9rem; font-weight:500; color:var(--gray-500); }
-.pricing-desc { font-size:.9rem; color:var(--gray-500); margin-bottom:24px; padding-bottom:24px; border-bottom:1px solid var(--gray-200); }
-.pricing-features { display:flex; flex-direction:column; gap:10px; margin-bottom:28px; }
+.pricing-price {
+    font-size:2.4rem; font-weight:900; color:#111827; line-height:1.1; margin-bottom:4px;
+}
+.pricing-price span {
+    font-size:.88rem; font-weight:500; color:#6B7280; margin-left:2px;
+}
+.pricing-period {
+    font-size:.82rem; color:#6B7280; margin-bottom:20px; padding-bottom:20px;
+    border-bottom:1px solid #F3F4F6;
+}
+.pricing-features {
+    display:flex; flex-direction:column; gap:12px; margin-bottom:28px; flex-grow:1;
+}
 .pricing-feat {
-    display:flex; align-items:center; gap:10px; font-size:.88rem; color:var(--gray-700);
+    display:flex; align-items:flex-start; gap:10px; font-size:.86rem; color:#374151; line-height:1.4;
 }
-.pricing-feat svg { width:18px; height:18px; color:var(--success); flex-shrink:0; }
-.pricing-card .btn { width:100%; }
+.pricing-feat svg {
+    width:16px; height:16px; color:#059669; stroke:#059669; flex-shrink:0; margin-top:2px;
+}
+.pricing-card .btn {
+    width:100%; padding:12px 18px; font-size:.85rem; font-weight:700;
+    border-radius:8px; text-align:center; transition:all .2s ease;
+    text-decoration:none; display:block; cursor:pointer; font-family:inherit;
+    border:none;
+}
+.pricing-card .btn-outline {
+    background:#FFFFFF; border:1.5px solid #E5E7EB; color:#1E293B;
+}
+.pricing-card .btn-outline:hover {
+    background:#F9FAFB; border-color:#D1D5DB;
+}
+.pricing-card .btn-primary {
+    background:#EA8C00; border:none; color:#111827;
+}
+.pricing-card .btn-primary:hover {
+    background:#D47700; transform:translateY(-1px);
+}
+.pricing-card .btn-navy {
+    background:#1B2A4A; border:none; color:#FFFFFF;
+}
+.pricing-card .btn-navy:hover {
+    background:#111D35; transform:translateY(-1px);
+}
+.pricing-card .btn-current {
+    background:#FAF3E0; border:1.5px solid #E28800; color:#8C6819;
+    font-weight:800;
+}
+.pricing-card .btn-current:hover {
+    background:#F5E8C7;
+}
+
+/* Pricing Renew Bottom Card */
+.pricing-renew-card {
+    max-width:1160px; margin:32px auto 0;
+    background:var(--white); border:1px solid #E5E7EB; border-radius:16px;
+    padding:24px 32px; display:flex; justify-content:space-between; align-items:center;
+    box-shadow:0 4px 16px rgba(0,0,0,.03);
+}
+.renew-info { display:flex; flex-direction:column; gap:4px; }
+.renew-plan-name {
+    font-size:.82rem; font-weight:700; color:#6B7280;
+    text-transform:uppercase; letter-spacing:.05em;
+}
+.renew-price { display:flex; align-items:baseline; gap:8px; }
+.renew-amount { font-size:2.2rem; font-weight:900; color:#111827; line-height:1; }
+.renew-cycle { font-size:.95rem; color:#9CA3AF; font-weight:400; }
+.renew-actions { display:flex; gap:14px; align-items:center; }
+.btn-renew-manual {
+    background:#FFFFFF; border:1.5px solid #D1D5DB; color:#111827;
+    font-size:.8rem; font-weight:700; letter-spacing:.04em;
+    padding:13px 24px; border-radius:8px; cursor:pointer;
+    transition:all .2s; font-family:inherit; text-transform:uppercase;
+}
+.btn-renew-manual:hover {
+    border-color:#9CA3AF; background:#F9FAFB;
+}
+.btn-renew-stripe {
+    background:#EA8C00; border:none; color:#111827;
+    font-size:.8rem; font-weight:800; letter-spacing:.04em;
+    padding:13px 28px; border-radius:8px; cursor:pointer;
+    box-shadow:0 4px 14px rgba(234,140,0,.35);
+    transition:all .2s; font-family:inherit; text-transform:uppercase;
+}
+.btn-renew-stripe:hover {
+    background:#D47700; transform:translateY(-1px);
+    box-shadow:0 6px 18px rgba(234,140,0,.45);
+}
 
 /* ================================================================
    TESTIMONIALS
@@ -672,24 +751,28 @@ section { padding:96px 0; }
 }
 
 /* ================================================================
-   DEMO REQUEST MODAL
+   DEMO & PAYMENT MODALS
    ================================================================ */
-.demo-modal-overlay {
+.demo-modal-overlay,
+.payment-modal-overlay {
     position:fixed; inset:0; z-index:10000;
     background:rgba(0,0,0,.6); backdrop-filter:blur(4px);
     display:flex; align-items:center; justify-content:center;
     opacity:0; visibility:hidden; transition:opacity .3s, visibility .3s;
 }
-.demo-modal-overlay.active { opacity:1; visibility:visible; }
+.demo-modal-overlay.active,
+.payment-modal-overlay.active { opacity:1; visibility:visible; }
 
-.demo-modal {
+.demo-modal,
+.payment-modal {
     background:var(--white); border-radius:var(--radius-lg);
     width:90%; max-width:520px; max-height:90vh; overflow-y:auto;
     box-shadow:0 25px 50px rgba(0,0,0,.25);
     transform:translateY(24px) scale(.97);
     transition:transform .3s ease;
 }
-.demo-modal-overlay.active .demo-modal {
+.demo-modal-overlay.active .demo-modal,
+.payment-modal-overlay.active .payment-modal {
     transform:translateY(0) scale(1);
 }
 
@@ -833,7 +916,8 @@ section { padding:96px 0; }
     .steps-grid { grid-template-columns:repeat(2,1fr); }
     .steps-grid::before { display:none; }
     .showcase-content { grid-template-columns:1fr; }
-    .pricing-grid { grid-template-columns:1fr; max-width:400px; }
+    .pricing-grid { grid-template-columns:repeat(2,1fr); max-width:680px; gap:20px; }
+    .pricing-renew-card { max-width:680px; }
     .testimonials-grid { grid-template-columns:1fr; }
     .app-inner { grid-template-columns:1fr; text-align:center; }
     .app-badges { justify-content:center; }
@@ -883,7 +967,12 @@ section { padding:96px 0; }
 
     /* Pricing */
     .pricing-grid { grid-template-columns:1fr; max-width:100%; }
-    .pricing-card { padding:28px; }
+    .pricing-card { padding:28px 22px; }
+    .pricing-renew-card {
+        flex-direction:column; align-items:flex-start; gap:20px; padding:20px;
+    }
+    .renew-actions { width:100%; flex-direction:column; gap:10px; }
+    .btn-renew-manual, .btn-renew-stripe { width:100%; text-align:center; }
 
     /* Testimonials */
     .testimonials-grid { grid-template-columns:1fr; }
@@ -1543,94 +1632,119 @@ section { padding:96px 0; }
                 Pricing Plans
             </div>
             <h2>Simple, Transparent Pricing</h2>
-            <p>Start free, scale as you grow. No hidden fees.</p>
+            <p>Choose the plan that fits your team. Scale as you grow.</p>
         </div>
 
         <div class="pricing-grid reveal">
             <!-- Starter -->
-            <div class="pricing-card">
-                <div class="pricing-label">Starter</div>
-                <div class="pricing-price">Free<span></span></div>
-                <div class="pricing-desc">For small teams getting started with construction management.</div>
-                <div class="pricing-features">
-                    <div class="pricing-feat">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        Up to 3 projects
-                    </div>
-                    <div class="pricing-feat">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        5 team members
-                    </div>
-                    <div class="pricing-feat">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        Basic DSR & Inventory
-                    </div>
-                    <div class="pricing-feat">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        Email support
+            <div class="pricing-card" data-plan="Starter" data-price="&#8377;999" data-cycle="/ month">
+                <div class="pricing-card-top">
+                    <div class="pricing-label">STARTER</div>
+                    <div class="pricing-price">&#8377;999</div>
+                    <div class="pricing-period">per month</div>
+                    <div class="pricing-features">
+                        <div class="pricing-feat">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            10 users
+                        </div>
+                        <div class="pricing-feat">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            3 projects
+                        </div>
+                        <div class="pricing-feat">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            All modules &amp; roles
+                        </div>
                     </div>
                 </div>
-                <a href="https://www.buildersnova.com" class="btn btn-outline">Get Started Free</a>
+                <button type="button" class="btn btn-outline" onclick="selectPricingPlan(this, 'Starter', '&#8377;999', '/ month')">Switch to Starter</button>
             </div>
 
             <!-- Professional -->
-            <div class="pricing-card featured">
-                <div class="pricing-label">Professional</div>
-                <div class="pricing-price">&#8377;1,499<span>/month</span></div>
-                <div class="pricing-desc">For growing construction companies managing multiple sites.</div>
-                <div class="pricing-features">
-                    <div class="pricing-feat">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        Unlimited projects
-                    </div>
-                    <div class="pricing-feat">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        25 team members
-                    </div>
-                    <div class="pricing-feat">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        Full DSR/WSR + Procurement
-                    </div>
-                    <div class="pricing-feat">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        Analytics dashboard
-                    </div>
-                    <div class="pricing-feat">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        Priority support
+            <div class="pricing-card" data-plan="Professional" data-price="&#8377;2,999" data-cycle="/ month">
+                <div class="pricing-card-top">
+                    <div class="pricing-label">PROFESSIONAL</div>
+                    <div class="pricing-price">&#8377;2,999</div>
+                    <div class="pricing-period">per month</div>
+                    <div class="pricing-features">
+                        <div class="pricing-feat">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            25 users
+                        </div>
+                        <div class="pricing-feat">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            10 projects
+                        </div>
+                        <div class="pricing-feat">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            All modules &amp; roles
+                        </div>
                     </div>
                 </div>
-                <a href="https://www.buildersnova.com" class="btn btn-primary">Start Free Trial</a>
+                <button type="button" class="btn btn-outline" onclick="selectPricingPlan(this, 'Professional', '&#8377;2,999', '/ month')">Switch to Professional</button>
+            </div>
+
+            <!-- Business -->
+            <div class="pricing-card" data-plan="Business" data-price="&#8377;5,999" data-cycle="/ month">
+                <div class="pricing-card-top">
+                    <div class="pricing-label">BUSINESS</div>
+                    <div class="pricing-price">&#8377;5,999</div>
+                    <div class="pricing-period">per month</div>
+                    <div class="pricing-features">
+                        <div class="pricing-feat">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            75 users
+                        </div>
+                        <div class="pricing-feat">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            Unlimited projects
+                        </div>
+                        <div class="pricing-feat">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            All modules &amp; roles
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-outline" onclick="selectPricingPlan(this, 'Business', '&#8377;5,999', '/ month')">Switch to Business</button>
             </div>
 
             <!-- Enterprise -->
-            <div class="pricing-card">
-                <div class="pricing-label">Enterprise</div>
-                <div class="pricing-price">Custom<span></span></div>
-                <div class="pricing-desc">For large builders and developers with advanced needs.</div>
-                <div class="pricing-features">
-                    <div class="pricing-feat">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        Everything in Professional
-                    </div>
-                    <div class="pricing-feat">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        Unlimited team members
-                    </div>
-                    <div class="pricing-feat">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        Custom integrations
-                    </div>
-                    <div class="pricing-feat">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        Dedicated account manager
-                    </div>
-                    <div class="pricing-feat">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        SLA & on-premise option
+            <div class="pricing-card" data-plan="Enterprise" data-price="&#8377;15,000+" data-cycle="/ month">
+                <div class="pricing-card-top">
+                    <div class="pricing-label">ENTERPRISE</div>
+                    <div class="pricing-price">&#8377;15,000+</div>
+                    <div class="pricing-period">per month</div>
+                    <div class="pricing-features">
+                        <div class="pricing-feat">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            Unlimited users
+                        </div>
+                        <div class="pricing-feat">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            Unlimited projects
+                        </div>
+                        <div class="pricing-feat">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            All modules &amp; roles
+                        </div>
                     </div>
                 </div>
-                <a href="https://www.buildersnova.com" class="btn btn-navy">Contact Sales</a>
+                <button type="button" class="btn btn-navy" onclick="openDemoModal(); return false;">Contact Sales</button>
+            </div>
+        </div>
+
+        <!-- Renew Bottom Card -->
+        <div class="pricing-renew-card reveal" id="pricingRenewCard">
+            <div class="renew-info">
+                <span class="renew-plan-name" id="renewPlanName">Renew Business</span>
+                <div class="renew-price">
+                    <span class="renew-amount" id="renewPriceAmount">&#8377;5,999</span>
+                    <span class="renew-cycle" id="renewPriceCycle">/ month</span>
+                </div>
+            </div>
+            <div class="renew-actions">
+                <button type="button" class="btn-renew-manual" onclick="handleManualPay()">MARK AS PAID (MANUAL)</button>
+                <button type="button" class="btn-renew-stripe" onclick="handleStripePay()">PAY WITH STRIPE</button>
             </div>
         </div>
     </div>
@@ -1808,8 +1922,8 @@ section { padding:96px 0; }
             <div class="footer-col">
                 <h4>Resources</h4>
                 <a href="#">Help docs</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms & Conditions</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="privacy-policy.html">Terms & Conditions</a>
                 <a href="#">Delete Account</a>
                 <a href="#">Blog</a>
             </div>
@@ -2332,7 +2446,7 @@ function demoPrevStep(fromStep) {
 }
 
 // Form submission
-demoForm.addEventListener('submit', function(e) {
+demoForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     if (!validateStep(3)) return;
 
@@ -2349,19 +2463,43 @@ demoForm.addEventListener('submit', function(e) {
         city: formData.get('city'),
         interest: formData.get('interest'),
         projects: formData.get('projects'),
-        message: formData.get('message'),
-        submittedAt: new Date().toISOString(),
-        source: 'website-demo-request'
+        message: formData.get('message')
     };
 
-    // Store lead in localStorage
-    const existingLeads = JSON.parse(localStorage.getItem('buildersnova_demo_leads') || '[]');
-    existingLeads.push(leadData);
-    localStorage.setItem('buildersnova_demo_leads', JSON.stringify(existingLeads));
+    // Disable submit button to prevent double submission
+    const submitBtn = demoForm.querySelector('.demo-btn-submit');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
 
-    // Log to console for debugging
-    console.log('📋 New Demo Lead Captured:', leadData);
-    console.log('📊 Total Leads:', existingLeads.length);
+    try {
+        // Send to server API
+        const response = await fetch('/api/demo-request', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(leadData)
+        });
+        const result = await response.json();
+
+        if (result.success) {
+            console.log('✅ Demo lead saved to server! Lead ID:', result.leadId);
+        } else {
+            console.warn('⚠️ Server rejected lead:', result.error);
+        }
+    } catch (err) {
+        // Fallback: save to localStorage if server is not running
+        console.warn('⚠️ Server unavailable, saving to localStorage:', err.message);
+        leadData.submittedAt = new Date().toISOString();
+        leadData.source = 'website-demo-request';
+        const existingLeads = JSON.parse(localStorage.getItem('buildersnova_demo_leads') || '[]');
+        existingLeads.push(leadData);
+        localStorage.setItem('buildersnova_demo_leads', JSON.stringify(existingLeads));
+        console.log('📋 Lead saved to localStorage. Total:', existingLeads.length);
+    }
+
+    // Re-enable button
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
 
     // Show success
     currentDemoStep = 4;
@@ -2392,7 +2530,247 @@ document.querySelectorAll('a').forEach(link => {
         });
     }
 });
+
+// ============================================================
+// PRICING / SUBSCRIPTION MODULE LOGIC
+// ============================================================
+let currentSubscription = {
+    plan: 'Business',
+    price: '&#8377;5,999',
+    rawPrice: '₹5,999',
+    cycle: '/ month'
+};
+
+function selectPricingPlan(btnEl, plan, price, cycle) {
+    currentSubscription = {
+        plan: plan,
+        price: price,
+        rawPrice: price.replace('&#8377;', '₹'),
+        cycle: cycle
+    };
+
+    // Update card styles
+    document.querySelectorAll('.pricing-grid .pricing-card').forEach(card => {
+        card.classList.remove('selected');
+        const cardPlan = card.getAttribute('data-plan');
+        const cardBtn = card.querySelector('.btn');
+
+        if (cardPlan === plan) {
+            card.classList.add('selected');
+            cardBtn.className = 'btn btn-primary';
+            cardBtn.textContent = 'Selected Plan';
+        } else if (cardPlan === 'Enterprise') {
+            cardBtn.className = 'btn btn-navy';
+            cardBtn.textContent = 'Contact Sales';
+        } else {
+            cardBtn.className = 'btn btn-outline';
+            cardBtn.textContent = 'Switch to ' + cardPlan;
+        }
+    });
+
+    // Update renewal card below
+    const planNameEl = document.getElementById('renewPlanName');
+    const priceAmountEl = document.getElementById('renewPriceAmount');
+    const priceCycleEl = document.getElementById('renewPriceCycle');
+
+    if (planNameEl) planNameEl.textContent = 'Renew ' + plan;
+    if (priceAmountEl) priceAmountEl.innerHTML = price;
+    if (priceCycleEl) priceCycleEl.textContent = cycle;
+}
+
+// Payment modal handlers
+const paymentOverlay = document.getElementById('paymentModalOverlay');
+const paymentCloseBtn = document.getElementById('paymentModalClose');
+
+function closePaymentModal() {
+    if (paymentOverlay) paymentOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function handleStripePay() {
+    document.getElementById('stripePlanName').textContent = currentSubscription.plan + ' Subscription';
+    document.getElementById('stripePlanPrice').innerHTML = currentSubscription.price + ' ' + currentSubscription.cycle;
+    document.getElementById('stripeSubmitBtnText').textContent = 'Pay ' + currentSubscription.rawPrice + ' with Stripe';
+
+    document.getElementById('stripePaymentPanel').style.display = 'block';
+    document.getElementById('manualPaymentPanel').style.display = 'none';
+    document.getElementById('paymentSuccessPanel').style.display = 'none';
+
+    document.getElementById('paymentModalTitle').textContent = 'Pay with Stripe';
+    document.getElementById('paymentModalSubtitle').textContent = 'Secure 256-bit encrypted checkout';
+
+    paymentOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function handleManualPay() {
+    document.getElementById('manualPlanName').textContent = currentSubscription.plan + ' Subscription';
+    document.getElementById('manualPlanPrice').innerHTML = currentSubscription.price + ' ' + currentSubscription.cycle;
+
+    document.getElementById('stripePaymentPanel').style.display = 'none';
+    document.getElementById('manualPaymentPanel').style.display = 'block';
+    document.getElementById('paymentSuccessPanel').style.display = 'none';
+
+    document.getElementById('paymentModalTitle').textContent = 'Manual Payment';
+    document.getElementById('paymentModalSubtitle').textContent = 'Direct Bank Transfer / UPI Details';
+
+    paymentOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function submitStripeMockPayment(e) {
+    e.preventDefault();
+    const btn = document.getElementById('stripeSubmitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Processing Payment...';
+
+    setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = 'Pay Now';
+        showPaymentSuccess('Stripe Payment Successful!', 'Transaction ID: str_live_' + Math.random().toString(36).substr(2, 9).toUpperCase() + '. Your ' + currentSubscription.plan + ' subscription is renewed.');
+    }, 1200);
+}
+
+function submitManualMockPayment(e) {
+    e.preventDefault();
+    const utr = document.getElementById('manualUtrInput').value;
+    const btn = document.getElementById('manualSubmitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+
+    setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = 'Confirm Manual Payment';
+        showPaymentSuccess('Payment Submitted for Verification!', 'Ref / UTR: ' + (utr || 'BN-' + Date.now().toString().slice(-6)) + '. Our billing team will verify and activate your ' + currentSubscription.plan + ' plan within 2 business hours.');
+    }, 1000);
+}
+
+function showPaymentSuccess(title, message) {
+    document.getElementById('stripePaymentPanel').style.display = 'none';
+    document.getElementById('manualPaymentPanel').style.display = 'none';
+    document.getElementById('paymentSuccessPanel').style.display = 'block';
+
+    document.getElementById('paymentSuccessTitle').textContent = title;
+    document.getElementById('paymentSuccessMessage').textContent = message;
+    document.getElementById('paymentModalTitle').textContent = 'Payment Confirmation';
+    document.getElementById('paymentModalSubtitle').textContent = currentSubscription.plan + ' Plan';
+}
+
+if (paymentCloseBtn) paymentCloseBtn.addEventListener('click', closePaymentModal);
+if (paymentOverlay) {
+    paymentOverlay.addEventListener('click', (e) => {
+        if (e.target === paymentOverlay) closePaymentModal();
+    });
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closePaymentModal();
+    }
+});
 </script>
+
+<!-- ============================================================
+     PAYMENT MODAL (STRIPE & MANUAL PAY)
+     ============================================================ -->
+<div class="payment-modal-overlay" id="paymentModalOverlay">
+    <div class="payment-modal">
+        <div class="demo-modal-header">
+            <div>
+                <h3 id="paymentModalTitle">Checkout</h3>
+                <p id="paymentModalSubtitle">Builders Nova Subscription</p>
+            </div>
+            <button class="demo-modal-close" id="paymentModalClose">&times;</button>
+        </div>
+        <div class="demo-modal-body">
+            <!-- Stripe Panel -->
+            <div id="stripePaymentPanel">
+                <div style="background:#F9FAFB;border:1px solid #E5E7EB;border-radius:12px;padding:18px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <strong id="stripePlanName" style="color:var(--navy);font-size:1.05rem;display:block;">Business Subscription</strong>
+                        <span style="color:#6B7280;font-size:.82rem;">Billed monthly &bull; Cancel anytime</span>
+                    </div>
+                    <div style="text-align:right;">
+                        <strong id="stripePlanPrice" style="color:var(--navy);font-size:1.3rem;">&#8377;5,999 / month</strong>
+                    </div>
+                </div>
+
+                <form onsubmit="submitStripeMockPayment(event)">
+                    <div class="demo-field">
+                        <label>Cardholder Name <span class="required">*</span></label>
+                        <input type="text" placeholder="Full name on card" required value="Hari Ganesh">
+                    </div>
+                    <div class="demo-field">
+                        <label>Card Number <span class="required">*</span></label>
+                        <input type="text" placeholder="4242 &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 4242" required value="4242 4242 4242 4242">
+                    </div>
+                    <div class="demo-field-row">
+                        <div class="demo-field">
+                            <label>Expiry Date <span class="required">*</span></label>
+                            <input type="text" placeholder="MM / YY" required value="12/28">
+                        </div>
+                        <div class="demo-field">
+                            <label>CVC / CVV <span class="required">*</span></label>
+                            <input type="password" placeholder="123" maxlength="4" required value="123">
+                        </div>
+                    </div>
+                    <div class="demo-btn-row" style="margin-top:20px;">
+                        <button type="submit" class="btn-renew-stripe" id="stripeSubmitBtn" style="width:100%;padding:14px;font-size:.9rem;border-radius:8px;cursor:pointer;">
+                            <span id="stripeSubmitBtnText">Pay &#8377;5,999 with Stripe</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Manual Payment Panel -->
+            <div id="manualPaymentPanel" style="display:none;">
+                <div style="background:#FAF3E0;border:1px solid #E28800;border-radius:12px;padding:18px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <strong id="manualPlanName" style="color:#8C6819;font-size:1.05rem;display:block;">Business Subscription</strong>
+                        <span style="color:#6B7280;font-size:.82rem;">Direct Transfer / RTGS / NEFT / UPI</span>
+                    </div>
+                    <div style="text-align:right;">
+                        <strong id="manualPlanPrice" style="color:#8C6819;font-size:1.3rem;">&#8377;5,999 / month</strong>
+                    </div>
+                </div>
+
+                <div style="background:#F9FAFB;border:1px solid #E5E7EB;border-radius:12px;padding:18px;margin-bottom:20px;font-size:.88rem;line-height:1.7;">
+                    <div style="margin-bottom:6px;"><strong>Company:</strong> ATTNS INNOVATION LABS PVT LTD</div>
+                    <div style="margin-bottom:6px;"><strong>Bank Name:</strong> HDFC Bank Ltd.</div>
+                    <div style="margin-bottom:6px;"><strong>Account No:</strong> 50200088921821</div>
+                    <div style="margin-bottom:6px;"><strong>IFSC Code:</strong> HDFC0001234</div>
+                    <div><strong>UPI ID:</strong> <span style="color:#EA8C00;font-weight:700;">payments@attcity.in</span></div>
+                </div>
+
+                <form onsubmit="submitManualMockPayment(event)">
+                    <div class="demo-field">
+                        <label>Transaction / UTR Reference Number <span class="required">*</span></label>
+                        <input type="text" id="manualUtrInput" placeholder="e.g. 238910283019" required>
+                    </div>
+                    <div class="demo-field">
+                        <label>Your Registered Email or Phone <span class="required">*</span></label>
+                        <input type="text" placeholder="Enter email/phone used for account" required>
+                    </div>
+                    <div class="demo-btn-row" style="margin-top:20px;">
+                        <button type="submit" class="btn-renew-manual" id="manualSubmitBtn" style="width:100%;padding:14px;font-size:.85rem;background:var(--navy);color:#fff;border-color:var(--navy);border-radius:8px;cursor:pointer;">
+                            Confirm Manual Payment
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Success Panel -->
+            <div id="paymentSuccessPanel" style="display:none;text-align:center;padding:24px 8px;">
+                <div class="demo-success-icon" style="margin-bottom:16px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <h3 id="paymentSuccessTitle" style="color:var(--navy);font-size:1.3rem;margin-bottom:8px;">Payment Received!</h3>
+                <p id="paymentSuccessMessage" style="color:#6B7280;font-size:.9rem;line-height:1.6;margin-bottom:24px;"></p>
+                <button type="button" class="btn-renew-stripe" onclick="closePaymentModal()" style="padding:12px 32px;border-radius:8px;">Done</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
